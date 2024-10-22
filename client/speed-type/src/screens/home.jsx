@@ -1,8 +1,11 @@
+import FunChallenge from "../components/home/funchallenges";
+import UserFeedback from "../components/home/userfeedback";
 function Home () {
     return (
-        <>
-        <p>start coding from here</p>
-        </>
+        <div>
+            <FunChallenge/>
+            <UserFeedback/>
+        </div>
     )
 }
 
