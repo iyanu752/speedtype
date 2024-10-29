@@ -24,6 +24,7 @@ export default {
     fontSize: {
       t1: '18px',
       t2: '16px',
+      t3: '14px',
       h1: '56px',
       h2: '48px',
       h3: '40px',
