@@ -1,8 +1,8 @@
-import arrowDown from '/Users/iyanu/speedtype/client/speed-type/src/assets/Chevron Down.svg'
+import arrowDown from '/src/assets/Chevron Down.svg'
 function Navbar () {
     return (
         <>
-            <div className="py-[16px] flex fixed w-full flex-row justify-between items-center bg-white px-[64px] shadow-md">
+            <div className="py-[16px] flex fixed w-full flex-row justify-between items-center bg-white px-[64px] shadow-md z-50">
                 <div>LOGO</div>
                 <div className=" font-roboto text-t2 font-bold text-blue">
                     <ul className="flex items-center gap-[16px]">
