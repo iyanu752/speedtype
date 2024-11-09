@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <>
-        <div className="px-[64px] py-[112px]">
+        <div className="px-[64px] pb-[80px]">
             <div className="flex justify-between">
                 <div>
                     <h3 className=" font-roboto text-h3 font-bold pb-[24px]">Boost Your Typing Speed Today</h3>
@@ -9,7 +9,7 @@ function Footer() {
                 </div>
                 <div className="flex items-center gap-[16px]">
                     <button className="py-[12px] px-[24px] rounded-[10px] font-roboto font-normal text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="#">Start</a></button>
-                    <button className="py-[12px] px-[24px] font-roboto font-normal text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="#">Learn More</a></button>
+                    <button className="py-[12px] px-[24px] font-roboto font-normal text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="/About">Learn More</a></button>
                 </div>
             </div>
 
