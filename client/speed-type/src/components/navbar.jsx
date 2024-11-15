@@ -10,7 +10,7 @@ function Navbar () {
     }
     return (
         <>
-            <div className="py-[16px] flex font-roboto fixed w-full flex-row justify-between items-center bg-white px-[64px] shadow-md z-50">
+            <div className="py-[16px] flex font-roboto w-full flex-row justify-between items-center bg-white px-[64px] shadow-md z-50">
                 <div>LOGO</div>
                 <div className=" font-roboto text-t2 font-bold text-black">
                     <ul className="flex items-center gap-[16px]">
@@ -60,8 +60,8 @@ function Navbar () {
                             )}
                         </li>
                         <li className=' hover:text-blue'><a href='/Contact'>Contact Us</a></li>
-                        <li className=' hover:text-blue'><button className="border-blue text-blue hover:bg-blue hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]">Log in</button></li>
-                        <li className=' hover:text-blue'><button className=" border-blue text-blue hover:bg-blue  hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]"> Sign Up </button></li>
+                        <li className=' hover:text-blue'><button className="border-blue text-blue hover:bg-blue font-bold hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]">Log in</button></li>
+                        <li className=' hover:text-blue'><button className=" border-blue text-blue hover:bg-blue font-bold  hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]"> Sign Up </button></li>
                     </ul>
                 </div>
             </div>

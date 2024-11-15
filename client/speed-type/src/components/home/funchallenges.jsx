@@ -23,7 +23,7 @@ export default function FunChallenge() {
         <img src={relume} className='w-[48px] h-[48px]' />
         <h5 className='text-h5 font-semibold'>Track Your Progress and Compete with Others on Our Leaderboard</h5>
         <p>Our web app offers a seamless experience from registration to skill enhancement.</p>
-        <button className='flex text-blue mt-3'><span>Sign Up</span> <img src={arrowright} alt="arrow right" /></button>
+        <button className='flex font-bold text-blue mt-3'><span>Sign Up</span> <img src={arrowright} alt="arrow right" /></button>
         </div>
 
         <div className='flex flex-col justify-center items-center'>

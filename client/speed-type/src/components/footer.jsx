@@ -8,8 +8,8 @@ function Footer() {
                     <p className="font-normal font-roboto text-t1 ">Join our community and take on exciting typing challenges!</p>
                 </div>
                 <div className="flex items-center gap-[16px]">
-                    <button className="py-[12px] px-[24px] rounded-[10px] font-roboto font-normal text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="#">Start</a></button>
-                    <button className="py-[12px] px-[24px] font-roboto font-normal text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="/About">Learn More</a></button>
+                    <button className="py-[12px] px-[24px] rounded-[10px] font-roboto font-bold text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="#">Start</a></button>
+                    <button className="py-[12px] px-[24px] font-roboto font-bold text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="/About">Learn More</a></button>
                 </div>
             </div>
 
