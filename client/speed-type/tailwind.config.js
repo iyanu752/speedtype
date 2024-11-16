@@ -28,6 +28,7 @@ export default {
       h1: '56px',
       h2: '48px',
       h3: '40px',
+      h4: '32px',
       h5: '24px',
       h6: '20px'
     },
