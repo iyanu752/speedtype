@@ -28,7 +28,7 @@ function Navbar () {
                             </div>
 
                             {showDropdown && (
-                                <ul className="absolute top-[100%] left-0 mt-[4px] bg-white border-black border-2  px-[24px] py-[24px] w-[368px]">
+                                <ul className="absolute top-[100%] left-0 mt-[4px] bg-white z-50 border-black border-2  px-[24px] py-[24px] w-[368px]">
                                     <li className="pb-[16px] flex flex-row items-start hover:bg-gray-100 cursor-pointer">
                                     <img src={challenges} className='pr-[12px]' alt="typing challenges" />
                                      <div className='flex flex-col hover:text-blue'>
