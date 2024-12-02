@@ -67,11 +67,11 @@ export default function Analyticspage() {
                 </p>
                 <div className="pt-[32px]">
                 <div className="flex flex-row gap-3">
-                    <button className="hover:text-white border-2 font-bold border-blue text-blue hover:bg-blue rounded-[10px] py-[12px] px-[24px]">
+                    <button className="hover:text-white border-2 font-bold border-white hover:border-blue text-white hover:bg-blue rounded-[10px] py-[12px] px-[24px]">
                         Participate
                     </button>  
-                    <button className="hover:text-white border-2 font-bold border-blue text-blue hover:bg-blue rounded-[10px] py-[12px] px-[24px]">
-                        <a href="/About">View Leaderboard</a>
+                    <button className="hover:text-white border-2 font-bold border-white hover:border-blue text-white hover:bg-blue rounded-[10px] py-[12px] px-[24px]">
+                        <a href="#">View Leaderboard</a>
                     </button>
                
                 </div>

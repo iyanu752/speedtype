@@ -85,7 +85,7 @@ function Faq() {
                         FAQs
                         </h1>
                         <p className=" font-roboto pb-[32px] text-t1 font-normal">Find answers to common questions about our typing trainer app and enhance your skills.</p>
-                        <button className="py-[12px] rounded-[10px] px-[24px] border-blue border-2 text-blue hover:bg-blue hover:text-white">Contact</button>
+                        <button className="py-[12px] rounded-[10px] px-[24px] border-blue border-2 text-blue hover:bg-blue font-bold hover:text-white"><a href="/Contact">Contact</a></button>
                     </div>
   
                 </div>

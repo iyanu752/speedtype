@@ -71,10 +71,10 @@ export default function Challengespage () {
                                 <p>Monitor your improvement with detailed analytics and feedback.</p> 
                                 </div>
                          </div> 
-                            <div className='flex flex-row gap-[24px] pt-[40px]'>
+                            {/* <div className='flex flex-row gap-[24px] pt-[40px]'>
                             <button className="hover:text-white border-2 font-bold border-blue  text-blue hover:bg-blue rounded-[10px] py-[10px] w-[134px]"><a href='/About'>View</a></button>
                             <button className='flex font-bold text-blue mt-3'><span>Join</span> <img src={arrowright} alt="arrow right" /></button>
-                            </div>
+                            </div> */}
                         </div>
 
                
@@ -85,10 +85,10 @@ export default function Challengespage () {
                 <div>
                     <h2 className='text-h2 font-bold pb-[24px]'>Take Your Typing Challenge Now</h2>
                     <p className='pb-[32px] text-t1 font-normal'>Join our community and improve your typing speed with exciting new challenges tailored for you!</p>
-                    <div className='flex gap-[24px]'>
+                    {/* <div className='flex gap-[24px]'>
                     <button className="border-blue text-blue hover:bg-blue font-bold hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]">Start</button>
                     <button className=" border-blue text-blue hover:bg-blue font-bold  hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]"> Button </button>
-                    </div>
+                    </div> */}
                 </div>
                 <div>
                     <img src={Tc} alt="" />

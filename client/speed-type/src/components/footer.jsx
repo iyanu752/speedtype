@@ -9,7 +9,7 @@ function Footer() {
                 </div>
                 <div className="flex items-center gap-[16px]">
                     <button className="py-[12px] px-[24px] rounded-[10px] font-roboto font-bold text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="#">Start</a></button>
-                    <button className="py-[12px] px-[24px] font-roboto font-bold text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white"><a href="/About">Learn More</a></button>
+                    <a href="/About"> <button className="py-[12px] px-[24px] font-roboto font-bold text-t2 text-blue border-blue border-2 hover:bg-blue hover:text-white">Learn More</button></a>
                 </div>
             </div>
 

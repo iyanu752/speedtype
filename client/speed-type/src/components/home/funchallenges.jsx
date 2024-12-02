@@ -23,21 +23,21 @@ export default function FunChallenge() {
         <img src={relume} className='w-[48px] h-[48px]' />
         <h5 className='text-h5 font-semibold'>Track Your Progress and Compete with Others on Our Leaderboard</h5>
         <p>Our web app offers a seamless experience from registration to skill enhancement.</p>
-        <button className='flex font-bold text-blue mt-3'><span>Sign Up</span> <img src={arrowright} alt="arrow right" /></button>
+        <button className='flex font-semibold text-blue mt-3'><span>Sign Up</span> <img src={arrowright} alt="arrow right" /></button>
         </div>
 
         <div className='flex flex-col justify-center items-center'>
         <img src={relume} className='w-[48px] h-[48px]' />
         <h5 className='text-h5 font-semibold'>Engage in Fun Challenges to Boost Your Typing Speed and Accuracy</h5>
         <p>Complete various typing challenges designed to improve your speed and precision.</p>
-        <button className='flex text-blue mt-3'><span>Start</span> <img src={arrowright} alt="arrow right" /></button>
+        <a href="/Challenges"><button className='flex text-blue mt-3'><span> Start</span> <img src={arrowright} alt="arrow right" /></button></a>
         </div>
 
         <div className='flex flex-col justify-center items-center'>
         <img src={relume} className='w-[48px] h-[48px]' />
         <h5 className='text-h5 font-semibold'>Analyze Your Performance with Detailed Charts and Insights</h5>
         <p>View your typing statistics and track your improvement over time.</p>
-        <button className='flex text-blue mt-3'><span>View</span> <img src={arrowright} alt="arrow right" /></button>
+       <a href="/Analytics"> <button className='flex text-blue mt-3'><span>View</span> <img src={arrowright} alt="arrow right" /></button></a>
         </div>
         </div>
 </div>

@@ -11,8 +11,8 @@ export default function Leaderboardhero () {
             <p className='text-t1 font-medium'>Join the race to the top and see how you stack up against the best typists!</p>
             <div className='pt-[32px]'>        
                 <ul className='flex gap-3'>
-                <li><button className="hover:text-white border-2 font-bold border-blue text-blue hover:bg-blue rounded-[10px] py-[10px] w-[134px]"> View </button></li>
-                <li><button className="hover:text-white border-2 font-bold border-blue text-blue hover:bg-blue rounded-[10px] py-[10px] w-[134px]"><a href='/About'>Challenge</a></button></li>
+                <li><button className="text-white border-2 font-bold hover:border-blue  border-white hover:bg-blue rounded-[10px] py-[10px] w-[134px]"> View </button></li>
+                <li><button className="text-white border-2 font-bold hover:border-blue border-white hover:bg-blue rounded-[10px] py-[10px] w-[134px]"><a href='/About'>Challenge</a></button></li>
                 </ul>
             </div>
         </div>
