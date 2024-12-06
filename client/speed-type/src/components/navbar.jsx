@@ -1,4 +1,4 @@
-import arrowDown from '/src/assets/Chevron Down.svg'
+import arrowDown from '/src/assets/chevron-down.svg'
 import challenges from '/src/assets/challenges.svg'
 import analytics from '/src/assets/analytics.svg'
 import leaderboard from '/src/assets/leaderboard.svg'

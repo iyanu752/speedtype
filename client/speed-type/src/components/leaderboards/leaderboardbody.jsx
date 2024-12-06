@@ -1,4 +1,4 @@
-import Champions from '/src/assets/Champions.png'
+import Champions from '/src/assets/champions.png'
 import arrowright from '/src/assets/chevron-right.svg'
 import cup from '/src/assets/cup.png'
 export default function Leaderboardbody() {
