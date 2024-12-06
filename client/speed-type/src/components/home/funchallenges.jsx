@@ -1,7 +1,7 @@
-import TechLady from '/src/assets/woman-laptop.png'
-import TechMan from '/src/assets/man-laptop.png'
-import relume from '/src/assets/Relume.svg'
-import arrowright from '/src/assets/chevron-right.svg'
+import TechLady from '/assets/woman-laptop.png'
+import TechMan from '/assets/man-laptop.png'
+import relume from '/assets/Relume.svg'
+import arrowright from '/assets/chevron-right.svg'
 export default function FunChallenge() {
     return(
         <div className=' px-[64px] gap-[80px] items-center justify-center font-roboto py-[112px] flex flex-col'>

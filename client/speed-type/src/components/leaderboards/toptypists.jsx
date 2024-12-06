@@ -1,5 +1,5 @@
-import Trophy from '/src/assets/trophy.png'
-import arrowright from '/src/assets/chevron-right.svg'
+import Trophy from '/assets/Trophy.png'
+import arrowright from '/assets/chevron-right.svg'
 export default function Toptypists() {
     return(
         <div className="py-[112px] font-roboto px-[64px] gap-[80px] flex flex-row items-center">

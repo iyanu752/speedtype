@@ -1,7 +1,7 @@
-import arrowDown from '/src/assets/chevron-down.svg'
-import challenges from '/src/assets/challenges.svg'
-import analytics from '/src/assets/analytics.svg'
-import leaderboard from '/src/assets/leaderboard.svg'
+import arrowDown from '/assets/chevron-down.svg'
+import challenges from '/assets/challenges.svg'
+import analytics from '/assets/analytics.svg'
+import leaderboard from '/assets/leaderboard.svg'
 import { useState } from 'react';
 function Navbar () {
     const [showDropdown, setShowDropdown] = useState(false)

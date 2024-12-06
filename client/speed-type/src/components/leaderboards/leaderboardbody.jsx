@@ -1,6 +1,6 @@
-import Champions from '/src/assets/champions.png'
-import arrowright from '/src/assets/chevron-right.svg'
-import cup from '/src/assets/cup.png'
+import Champions from '/assets/champions.png'
+import arrowright from '/assets/chevron-right.svg'
+import cup from '/assets/cup.png'
 export default function Leaderboardbody() {
     return (
         <div className="py-[112px] px-[64px] flex flex-col font-roboto">

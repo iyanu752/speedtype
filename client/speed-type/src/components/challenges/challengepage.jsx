@@ -1,10 +1,10 @@
-import cardOne from '/src/assets/card-one.png'
-import cardTwo from '/src/assets/card-two.png'
-import cardThree from '/src/assets/card-three.png'
-import arrowright from '/src/assets/chevron-right.svg'
-import typewriter from '/src/assets/typewriter.png'
-import typing from '/src/assets/typing.png'
-import Tc from '/src/assets/tc.png'
+import cardOne from '/assets/card-one.png'
+import cardTwo from '/assets/card-two.png'
+import cardThree from '/assets/card-three.png'
+import arrowright from '/assets/chevron-right.svg'
+import typewriter from '/assets/typewriter.png'
+import typing from '/assets/typing.png'
+import Tc from '/assets/tc.png'
 export default function Challengespage () {
     return (
         <div className=" flex flex-col py-[112px] px-[64px] font-roboto">

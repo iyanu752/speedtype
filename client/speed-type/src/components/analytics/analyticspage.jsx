@@ -1,7 +1,7 @@
-import arrowright from '/src/assets/chevron-right.svg'
-import analyticsOne from '/src/assets/analytics1.png'
-import analyticsTwo from '/src/assets/analysis2.png'
-import analyticCard from '/src/assets/leaderboard-hero.png'
+import arrowright from '/assets/chevron-right.svg'
+import analyticsOne from '/assets/analytics1.png'
+import analyticsTwo from '/assets/analysis2.png'
+import analyticCard from '/assets/leaderboard-hero.png'
 export default function Analyticspage() {
     return (
         <div className=" flex flex-col py-[112px] px-[64px] font-roboto">

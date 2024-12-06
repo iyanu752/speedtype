@@ -1,4 +1,4 @@
-import Leaderboard from '/src/assets/leaderboard-hero.png'
+import Leaderboard from '/assets/leaderboard-hero.png'
 
 export default function Leaderboardhero () {
     return (
