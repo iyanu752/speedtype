@@ -2,7 +2,23 @@ import signup from '/assets/signin.svg';
 import logo from '/assets/logo.svg';
 import google from '/assets/google.svg'
 import guest from '/assets/guest.png'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 export default function Signup() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const navigate = useNavigate()
+
+  const submitSignin = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:3001/signup', {name, email, password})
+    .then(result => 
+      {console.log(result)})
+      navigate('/login')
+    .catch(err => console.log(err))
+  }
   return (
     <div className="flex h-screen font-roboto">
       {/* Left side: Blue background with logo at the top-left and image centered */}
@@ -16,16 +32,18 @@ export default function Signup() {
       </div>
 
       {/* Right side: Sign-up form */}
-      <div className="w-1/2 flex justify-center items-center">
-        <form className="w-2/3 max-w-sm">
+      <div className="w-[50%] flex justify-center items-center">
+        <form
+        onSubmit={submitSignin}
+        className="w-2/3 max-w-sm">
           {/* Form Header */}
           <div className="flex flex-col items-center text-center justify-center mb-6">
-            <h1 className="text-h3 font-bold pb-[8px]">Sign Up</h1>
-            <p className="text-t1 font-normal">Enter your details to get started</p>
+            <h4 className="text-h4 font-bold pb-[8px]">Sign Up</h4>
+            <p className="text-t2 text-gray font-normal">Enter your details to get started</p>
           </div>
 
           {/* Input Fields */}
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Username
             </label>
@@ -33,19 +51,24 @@ export default function Signup() {
               type="text"
               id="name"
               placeholder="Enter your name"
+              onChange={(e) => setName(e.target.value)}
               className="border-2 border-gray rounded-[10px] w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue"
             />
           </div>
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
               Email
             </label>
+            <div className='flex flex-row'>
             <input
               type="email"
               id="email"
               placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
               className="border-2 border-gray rounded-[10px] w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue"
-            />
+            /> 
+            </div>
+           
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
@@ -55,6 +78,7 @@ export default function Signup() {
               type="password"
               id="password"
               placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
               className="border-2 border-gray rounded-[10px] w-full py-2 px-3 text-gray focus:outline-none focus:ring focus:border-blue"
             />
           </div>
@@ -87,6 +111,7 @@ export default function Signup() {
             <img className='w-[24px] h-[24px]' src={guest} alt="" />
             Sign Up as a Guest
           </button>
+          <p className='text-gray text-t2 text-center pt-[32px]'>Already have an account? <span className='text-blue'><a href="/Login">Sign In</a></span></p>
         </form>
       </div>
     </div>

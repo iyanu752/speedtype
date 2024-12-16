@@ -60,8 +60,8 @@ function Navbar () {
                             )}
                         </li>
                         <li className=' hover:text-blue'><a href='/Contact'>Contact Us</a></li>
-                        <li className=' hover:text-blue'><button className="border-blue text-blue hover:bg-blue font-bold hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]">Log in</button></li>
-                        <li className=' hover:text-blue'><button className=" border-blue text-blue hover:bg-blue font-bold  hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]"><a href="/Signup">Sign Up</a></button></li>
+                        <li className=' hover:text-blue'><a href="/Login"><button className="border-blue text-blue hover:bg-blue font-bold hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]">Log in</button></a></li>
+                        <li className=' hover:text-blue'><a href="/Signup"><button className=" border-blue text-blue hover:bg-blue font-bold  hover:text-white border-2 rounded-[10px] py-[8px] px-[20px]">Sign Up</button></a></li>
                     </ul>
                 </div>
             </div>

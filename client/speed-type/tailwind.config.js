@@ -9,7 +9,8 @@ export default {
       'blue': '#0028FF',
       'white': '#FFFFFF',
       'black': '#000000',
-      'gray': '#808080'
+      'gray': '#808080',
+      'red': '#ff0000'
     },
     fontFamily: {
       roboto: ['Roboto', 'sans-serif'],
