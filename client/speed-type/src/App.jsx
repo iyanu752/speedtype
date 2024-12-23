@@ -12,13 +12,14 @@ import PropTypes from 'prop-types';
 import Contact from './screens/contact';
 import Signup from './screens/signup';
 import Login from './screens/login';
+import Dashboard from './screens/dashboard';
 
 function AppLayout({ children }) {
   const location = useLocation();
   const [showNavbarFooter, setShowNavbarFooter] = useState(true);
 
   useEffect(() => { 
-    const hiddenRoutes = ['/signup', '/login'];
+    const hiddenRoutes = ['/signup', '/login', '/dashboard'];
     setShowNavbarFooter(!hiddenRoutes.includes(location.pathname));
   }, [location]);
 
@@ -68,6 +69,10 @@ function App() {
     {
       path: '/login',
       element: <div><Login/></div>,
+    },
+    {
+      path: '/dashboard',
+      element: <div><Dashboard/></div>,
     },
   ]);
 

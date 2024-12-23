@@ -13,7 +13,7 @@ export default function Signup() {
 
   const submitSignin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/signup', {name, email, password})
+    axios.post('http://localhost:3000/signup', {name, email, password})
     .then(result => 
       {console.log(result)})
       navigate('/login')

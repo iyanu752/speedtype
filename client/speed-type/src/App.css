@@ -5,3 +5,12 @@ th {
 td {
     text-align: center;
 } 
+
+.svg-icon {
+    filter: brightness(0); 
+  }
+  
+  .group:hover .svg-icon {
+    filter: brightness(5%) saturate(50%) invert(39%) sepia(95%) saturate(1200%) hue-rotate(210deg) brightness(90%) contrast(100%);
+  }
+  

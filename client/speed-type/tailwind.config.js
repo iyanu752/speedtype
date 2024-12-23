@@ -10,7 +10,7 @@ export default {
       'white': '#FFFFFF',
       'black': '#000000',
       'gray': '#808080',
-      'red': '#ff0000'
+      'red': '#ff0000',
     },
     fontFamily: {
       roboto: ['Roboto', 'sans-serif'],

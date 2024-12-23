@@ -18,7 +18,7 @@ export default function Login() {
     .then(result => 
       {console.log(result)
         if (result.data === "success") {
-          navigate('/')
+          navigate('/dashboard')
         }
       })
     .catch(err => console.log(err))
