@@ -6,7 +6,7 @@ import leader from '/assets/leader.svg';
 
 export default function Dashnav() {
   return (
-    <div className="h-screen w-64 bg-white text-gray font-roboto flex flex-col">
+    <div className="h-screen w-[300px] bg-white text-gray font-roboto flex flex-col">
       <div className="p-6 border-b border-gray">
         <img src={logo} alt="Logo" className='w-[100px]' />
       </div>
