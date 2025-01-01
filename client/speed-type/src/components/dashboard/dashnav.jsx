@@ -20,7 +20,7 @@ export default function Dashnav() {
         alt="Dashboard"
         className="svg-icon"
       />
-      Dashboard
+      <a href="/dashmain">Dashboard</a>
     </li>
     <li className="py-2 px-4 text-black font-bold hover:bg-blue hover:bg-opacity-5 flex gap-[12px] hover:text-blue rounded cursor-pointer group">
       <img
@@ -28,7 +28,7 @@ export default function Dashnav() {
         alt="Leaderboard"
         className="svg-icon"
       />
-      Leaderboard
+      <a href="/dashleaderboard">Leaderboard</a>
     </li>
     <li className="py-2 px-4 text-black font-bold hover:bg-blue hover:bg-opacity-5 flex gap-[12px] hover:text-blue rounded cursor-pointer group">
       <img

@@ -57,12 +57,12 @@ export default function Dashmain() {
                 </div>
             </div>
 
-            <div className='flex pt-[30px] gap-[30px] flex-row'>
-                <div>
-                    <img className='w-[200px] h-[200px] rounded-[10px]' src={Typing} alt="" />
+            <div className='flex pt-[30px]  gap-[30px] flex-row'>
+                <div className=''>
+                    <img className='w-[200px] h-[200px] shadow-md  rounded-[10px]' src={Typing} alt="" />
                 </div>
-                <div className='bg-white rounded-[10px]  flex items-center justify-center'><Donut/></div>
-                <div className="bg-white w-[700px] h-[250px] rounded-[10px] flex flex-col justify-center">
+                <div className='bg-white rounded-[10px] shadow-md   flex items-center justify-center'><Donut/></div>
+                <div className="bg-white w-[700px] px-[20px] h-[250px] shadow-md  rounded-[10px] flex flex-col justify-center">
                 <span className="font-bold text-left ml-[30px] mb-[8px]">Leaderboard</span>
                 <div className='flex justify-center'> <LeaderboardTable /></div>
                
@@ -70,9 +70,9 @@ export default function Dashmain() {
             </div>
 
             <div className='flex pt-[30px] gap-[30px] flex-row'>
-                <div className='bg-white w-[300px] h-[300px] rounded-[10px] flex items-center justify-center '><Bar/></div>
-                <div className='bg-white w-[250px] h-[300px] rounded-[10px] flex items-center justify-center '><Rader/></div>
-                <div className='bg-white w-[600px] h-[300px] rounded-[10px] flex items-center justify-center'><Area/></div>
+                <div className='bg-white w-[300px] h-[300px] shadow-md  rounded-[10px] flex items-center justify-center '><Bar/></div>
+                <div className='bg-white w-[250px] h-[300px] shadow-md  rounded-[10px] flex items-center justify-center '><Rader/></div>
+                <div className='bg-white w-[600px] h-[300px] shadow-md  rounded-[10px] flex items-center justify-center'><Area/></div>
 
             </div>
 

@@ -13,7 +13,9 @@ import Contact from './screens/contact';
 import Signup from './screens/signup';
 import Login from './screens/login';
 import Dashboard from './screens/dashboard';
-
+import Dashnav from './components/dashboard/dashnav';
+import Dashmain from './components/dashboard/dashmain';
+import LeaderboardTable from './components/leaderboard/leaderboardtable';
 function AppLayout({ children }) {
   const location = useLocation();
   const [showNavbarFooter, setShowNavbarFooter] = useState(true);
@@ -30,6 +32,20 @@ function AppLayout({ children }) {
       {showNavbarFooter && <Footer />}
     </>
   );
+}
+
+
+function NavLayout ({children}) {
+  return (
+    <div className='flex flex-row'> 
+    <Dashnav/>
+    {children}
+    </div>
+  )
+}
+
+NavLayout.propTypes = {
+  children: PropTypes.string.isRequired,
 }
 AppLayout.propTypes = {
   children: PropTypes.string.isRequired,
@@ -74,6 +90,14 @@ function App() {
       path: '/dashboard',
       element: <div><Dashboard/></div>,
     },
+    {
+      path: '/dashmain',
+      element: <NavLayout><Dashmain/></NavLayout>,
+    },
+    {
+      path: '/dashleaderboard',
+      element: <NavLayout><LeaderboardTable/></NavLayout>,
+    }
   ]);
 
   return <RouterProvider router={router} />;
