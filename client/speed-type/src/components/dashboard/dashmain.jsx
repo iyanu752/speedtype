@@ -13,7 +13,6 @@ import LeaderboardTable from '../leaderboard/leaderboardtable'
 export default function Dashmain() {
     return (
         <div className="bg-gradient-to-r from-lightblue via-darkblue to-blue w-full px-[32px] font-roboto py-[32px]">
-            <h6 className='text-black font-bold pb-[24px]'>Dashboard</h6>
             <div className=" flex justify-between flex-wrap flex-row">
                 <div className="bg-white shadow-md flex gap-[50px] items-center flex-row p-[10px] rounded-[10px]">
                     <div className="flex flex-col">

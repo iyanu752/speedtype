@@ -3,13 +3,23 @@ import logo from '/assets/logo.svg';
 import google from '/assets/google.svg'
 import guest from '/assets/guest.png'
 import { useState } from 'react';
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export default function Signup() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
+
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
   const submitSignin = (e) => {
     e.preventDefault();
@@ -17,7 +27,11 @@ export default function Signup() {
     .then(result => 
       {console.log(result)})
       navigate('/login')
-    .catch(err => console.log(err))
+      toast.success("Sign Up Successful")
+    .catch(err => 
+      {console.log(err)
+        toast.error("sign up failed")
+      })
   }
   return (
     <div className="flex h-screen font-roboto">
@@ -74,13 +88,14 @@ export default function Signup() {
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
               Password
             </label>
+            <div className="relative w-full">
             <input
-              type="password"
+              type= {showPassword ? "text" : "password"}
               id="password"
               placeholder="Enter your password"
               onChange={(e) => setPassword(e.target.value)}
-              className="border-2 border-gray rounded-[10px] w-full py-2 px-3 text-gray focus:outline-none focus:ring focus:border-blue"
-            />
+              className="border-2 border-gray rounded-[10px] w-full py-2 px-3  text-gray focus:outline-none focus:ring focus:border-blue"
+            />{showPassword ? <FaRegEyeSlash className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray cursor-pointer" onClick={togglePasswordVisibility} /> : <FaRegEye className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray cursor-pointer" onClick={togglePasswordVisibility} />}
           </div>
           <button
             type="submit"
@@ -88,6 +103,8 @@ export default function Signup() {
           >
             Sign Up
           </button>
+            </div>
+          
 
           {/* Divider with "or" */}
           <div className="flex items-center my-6">

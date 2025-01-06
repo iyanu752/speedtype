@@ -7,6 +7,7 @@ import Footer from './components/footer';
 import About from './screens/about';
 import Analytics from './screens/analytics';
 import Challenges from './screens/challenges';
+import { ToastContainer } from 'react-toastify';
 import Leaderboard from './screens/leaderboards';
 import PropTypes from 'prop-types';
 import Contact from './screens/contact';
@@ -100,7 +101,24 @@ function App() {
     }
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme='light'
+      pauseOnFocusLoss={false}
+      pauseOnHover={false}
+      draggable={false}
+    >
+    </ToastContainer>
+    <RouterProvider router={router} />
+    </>
+);
 }
 
 export default App;
