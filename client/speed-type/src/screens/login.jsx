@@ -28,6 +28,10 @@ export default function Login() {
       if (result.data === "success") {
         navigate('/dashmain');
         toast.success("Login Successful");
+      } else if (result.data === "password is incorrect") {
+        toast.error("Password is incorrect");
+      } else {
+        toast.error("No record existed");
       }
     })
     .catch(err => {
