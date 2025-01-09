@@ -1,64 +1,98 @@
-import { useLocation } from 'react-router-dom';
+import { useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { Card, Typography, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
+import { MdDashboard, MdLeaderboard, MdGames, MdHelpCenter, MdArrowForwardIos } from "react-icons/md";
 import logo from '/assets/speedlogo.svg';
-import dash from '/assets/dash.svg';
-import help from '/assets/help.svg';
-import challenge from '/assets/challenge.svg';
-import leader from '/assets/leader.svg';
 
 export default function Dashnav() {
   const location = useLocation(); // Get the current path
+  const [isMinimized, setIsMinimized] = useState(false); // State to track whether the navbar is minimized
 
   const isActive = (path) => location.pathname === path; // Check if the path matches the current route
 
   return (
-    <div className="h-screen w-[300px] bg-white text-gray font-roboto flex flex-col">
-      <div className="p-6 border-b border-gray">
+    <Card 
+      className={`h-screen transition-all duration-300 w-full ${
+        isMinimized ? "max-w-[5rem]" : "max-w-[20rem]"
+      } p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col`}>
+
+      {/* Toggle Button */}
+      <button 
+        onClick={() => setIsMinimized(!isMinimized)} 
+        className="absolute top-6 right-4 flex items-center justify-center w-[24px] h-[24px] rounded-full bg-blue-gray-50 shadow hover:bg-blue-gray-100">
+        <MdArrowForwardIos 
+          className={`w-4 h-5 text-blue-gray-600 transition-transform duration-300 ${
+            !isMinimized ? "rotate-180" : ""
+          }`} 
+        />
+      </button>
+
+      {/* Logo Section */}
+      <div className={`mb-2 p-4 ${isMinimized ? "hidden" : ""}`}>
         <img src={logo} alt="Logo" className="w-[100px]" />
       </div>
-      <nav className="flex-grow p-4">
-        <div className="mb-6">
-          <span className="text-gray uppercase py-2 px-4 text-sm">Pages</span>
-          <ul className="mt-2">
-            <li
-              className={`py-2 px-4 font-bold flex gap-[12px] rounded cursor-pointer group ${
-                isActive('/dashmain') ? 'bg-blue bg-opacity-40 text-white groups' : 'text-black hover:bg-blue hover:bg-opacity-5 hover:text-blue'
-              }`}
-            >
-              <img src={dash} alt="Dashboard" className="svg-icon" />
-              <a href="/dashmain">Dashboard</a>
-            </li>
-            <li
-              className={`py-2 px-4 font-bold flex gap-[12px] rounded cursor-pointer group ${
-                isActive('/dashleaderboard') ? 'bg-blue bg-opacity-40 text-white groups' : 'text-black hover:bg-blue hover:bg-opacity-5 hover:text-blue'
-              }`}
-            >
-              <img src={leader} alt="Leaderboard" className="svg-icon" />
-              <a href="/dashleaderboard">Leaderboard</a>
-            </li>
-            <li
-              className={`py-2 px-4 font-bold flex gap-[12px] rounded cursor-pointer group ${
-                isActive('/dashchallenges') ? 'bg-blue bg-opacity-40 text-white  groups' : 'text-black hover:bg-blue hover:bg-opacity-5 hover:text-blue'
-              }`}
-            >
-              <img src={challenge} alt="Challenges" className="svg-icon" />
-              <a href="/dashchallenges">Challenges</a>
-            </li>
-          </ul>
+
+      <hr className={`my-2 border-blue-gray-50 ${isMinimized ? "hidden" : ""}`} />
+
+      {/* Navigation List */}
+      <List className={isMinimized ? ' pt-[70px]' : ''}>
+        <ListItem 
+          className={`hover:text-blue hover:bg-light-blue-50 ${isActive('/dashmain') ? 'bg-light-blue-50 text-blue' : ''}`}>
+          <ListItemPrefix>
+            <Link to="/dashmain">
+              <MdDashboard className="h-5 w-5" />
+            </Link>
+          </ListItemPrefix>
+          {!isMinimized && <Link to="/dashmain">Dashboard</Link>}
+        </ListItem>
+        <ListItem 
+          className={`hover:text-blue hover:bg-light-blue-50 ${isActive('/dashleaderboard') ? 'bg-light-blue-50 text-blue' : ''}`}>
+          <ListItemPrefix>
+            <Link to="/dashleaderboard">
+              <MdLeaderboard className="h-5 w-5" />
+            </Link>
+          </ListItemPrefix>
+          {!isMinimized && <Link to="/dashleaderboard">Leaderboard</Link>}
+        </ListItem>
+        <ListItem 
+          className={`hover:text-blue hover:bg-light-blue-50 ${isActive('/dashchallenges') ? 'bg-light-blue-50 text-blue' : ''}`}>
+          <ListItemPrefix>
+            <Link to="/dashchallenges">
+              <MdGames className="h-5 w-5" />
+            </Link>
+          </ListItemPrefix>
+          {!isMinimized && <Link to="/dashchallenges">Challenges</Link>}
+        </ListItem>
+
+        <hr className="my-2 border-t border-blue-gray-50" />
+        
+        <ListItem 
+          className={`hover:text-blue hover:bg-light-blue-50 ${isActive('/help') ? 'bg-light-blue-50 text-blue' : ''}`}>
+          <ListItemPrefix>
+            <Link to="/help">
+              <MdHelpCenter className="h-5 w-5" />
+            </Link>
+          </ListItemPrefix>
+          {!isMinimized && <Link to="/help">Help and Support</Link>}
+        </ListItem>
+      </List>
+
+      {/* Profile Section */}
+      <div className={`flex items-center gap-4 mt-auto p-2 ${isMinimized ? "w-[100px] h-[100px] justify-start" : ""}`}>
+        <img 
+          src="https://via.placeholder.com/40"
+          alt="Profile" 
+          className="w-10 h-10 rounded-full object-cover" 
+        />
+        <div className={`${isMinimized ? "hidden" : ""}`}>
+          <Typography variant="small" color="blue-gray" className="font-medium">
+            John Doe 
+          </Typography>
+          <Typography variant="small" color="blue-gray" className="text-xs">
+            johndoe@example.com
+          </Typography>
         </div>
-        <div>
-          <span className="text-gray py-2 px-4 uppercase text-sm">Others</span>
-          <ul className="mt-2">
-            <li
-              className={`py-2 px-4 font-bold flex gap-[12px] rounded cursor-pointer group ${
-                isActive('/help') ? 'bg-blue bg-opacity-40 text-white  groups' : 'text-black hover:bg-blue hover:bg-opacity-5 hover:text-blue'
-              }`}
-            >
-              <img src={help} alt="Help and Support" className="svg-icon" />
-              <a href="/help">Help and Support</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+      </div>
+    </Card>
   );
 }
