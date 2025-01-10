@@ -5,15 +5,15 @@ import { MdDashboard, MdLeaderboard, MdGames, MdHelpCenter, MdArrowForwardIos } 
 import logo from '/assets/speedlogo.svg';
 
 export default function Dashnav() {
-  const location = useLocation(); // Get the current path
-  const [isMinimized, setIsMinimized] = useState(false); // State to track whether the navbar is minimized
+  const location = useLocation(); 
+  const [isMinimized, setIsMinimized] = useState(false);
 
-  const isActive = (path) => location.pathname === path; // Check if the path matches the current route
+  const isActive = (path) => location.pathname === path; 
 
   return (
     <Card 
-      className={`h-screen transition-all duration-300 w-full ${
-        isMinimized ? "max-w-[5rem]" : "max-w-[20rem]"
+      className={`h-screen rounded-none border transition-all duration-300 w-full ${
+        isMinimized ? "w-[5rem]" : "w-[320px]"
       } p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col`}>
 
       {/* Toggle Button */}

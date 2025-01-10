@@ -9,13 +9,20 @@ const Bar = () => {
         chart: {
           height: 350,
           type: 'bar',
+          toolbar: {
+            show: false,
+          },
+          dataLabels: {
+            enabled: false,
+          },
         },
         plotOptions: {
           bar: {
-            borderRadius: 10,
-            dataLabels: {
-              position: 'top', // top, center, bottom
-            },
+            columnWidth: "40%",
+            borderRadius: 2,
+            // dataLabels: {
+            //   position: 'top', // top, center, bottom
+            // },
           }
         },
         dataLabels: {
@@ -51,34 +58,48 @@ const Bar = () => {
               }
             }
           },
+          labels: {
+            style: {
+              colors: "#616161",
+              fontSize: "12px",
+              fontFamily: "inherit",
+              fontWeight: 400,
+            },
+          },
           tooltip: {
             enabled: true,
           }
         },
         yaxis: {
-          axisBorder: {
-            show: false
-          },
-          axisTicks: {
-            show: false,
-          },
           labels: {
-            show: false,
-            formatter: function (val) {
-              return val + "%";
-            }
-          }
-        
+            style: {
+              colors: "#616161",
+              fontSize: "12px",
+              fontFamily: "inherit",
+              fontWeight: 400,
+            },
+          },
         },
-        title: {
-          text: 'Monthly Inflation in Argentina, 2002',
-          floating: true,
-          offsetY: 330,
-          align: 'center',
-          style: {
-            color: '#444'
-          }
-        }
+        grid: {
+          show: true,
+          borderColor: "#dddddd",
+          strokeDashArray: 5,
+          xaxis: {
+            lines: {
+              show: true,
+            },
+          },
+          padding: {
+            top: 5,
+            right: 20,
+          },
+        },
+        fill: {
+          opacity: 0.8,
+        },
+        tooltip: {
+          theme: "dark",
+        },
       };
     
     

@@ -1,42 +1,105 @@
 import Chart from 'react-apexcharts';
 
 const Area = () => {
-    const series = [{
-        name: 'series1',
-        data: [31, 40, 28, 51, 42, 109, 100]
-      }, {
-        name: 'series2',
-        data: [11, 32, 45, 32, 34, 52, 41]
-      }];
+    const series = [ {
+      name: "Last Month",
+      data: [50, 40, 200, 220, 100, 250, 200, 230, 400, 410, 420, 430],
+    }, 
+    {
+      name: "This Month",
+      data: [60, 80, 400, 360, 310, 370, 250, 270, 510, 520, 530, 540],
+    }];
       const options = {
         chart: {
           height: 250,
-          type: 'area'
+          type: 'area',
+          toolbar: {
+            show: false,
+          },
+          title: {
+            show: "",
+          },
         },
         dataLabels: {
           enabled: false
         },
+        colors: ["#0028FF", "#71c3f7"],
         stroke: {
-          curve: 'smooth'
+          lineCap: "round",
+          curve: "smooth",
+        },
+        markers: {
+          size: 0,
         },
         xaxis: {
-          type: 'datetime',
-          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
+          labels: {
+            style: {
+              colors: "#616161",
+              fontSize: "12px",
+              fontFamily: "inherit",
+              fontWeight: 400,
+            },
+          },
+          categories: [
+           "Jan",
+            "Feb",
+            "Mar", 
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
         },
-        tooltip: {
-          x: {
-            format: 'dd/MM/yy HH:mm'
+        yaxis: {
+          labels: {
+            style: {
+              colors: "#616161",
+              fontSize: "12px",
+              fontFamily: "inherit",
+              fontWeight: 400,
+            },
           },
         },
-      }
+        grid: {
+          show: true,
+          borderColor: "#dddddd",
+          strokeDashArray: 5,
+          xaxis: {
+            lines: {
+              show: true,
+            },
+          },
+          padding: {
+            top: 5,
+            right: 20,
+          },
+        },
+        fill: {
+          opacity: 0.8,
+        },
+        tooltip: {
+          theme: "dark",
+        },
+      };
     
   
     
     
 
   return (
-    <div className="rader">
-      <Chart options={options} series={series}  type="area" width="600" height= "250" />
+    <div className="area ">
+      <Chart options={options} series={series}  type="area" width="700" height= "300" />
     </div>
   );
 };
