@@ -11,7 +11,7 @@ export default function Dashnav() {
   const isActive = (path) => location.pathname === path; 
 
   return (
-    <Card 
+<Card 
       className={`h-screen rounded-none border transition-all duration-300 w-full ${
         isMinimized ? "w-[5rem]" : "w-[320px]"
       } p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col`}>
