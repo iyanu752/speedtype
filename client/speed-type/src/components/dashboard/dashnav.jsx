@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Card, Typography, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { MdDashboard, MdLeaderboard, MdGames, MdHelpCenter, MdArrowForwardIos } from "react-icons/md";
+import ProfileForm from "../profile/profile";
 import logo from '/assets/speedlogo.svg';
 
 export default function Dashnav() {
   const location = useLocation(); 
   const [isMinimized, setIsMinimized] = useState(false);
-
+  const [modalOpen, setModalOpen] = useState(false);
+  const toggleModal = () => setModalOpen(!modalOpen);
   const isActive = (path) => location.pathname === path; 
 
   return (
@@ -78,15 +80,18 @@ export default function Dashnav() {
       </List>
 
       {/* Profile Section */}
+      <hr className={`my-2 border-blue-gray-50 ${isMinimized ? "hidden" : ""}`}/>
       <div className={`flex items-center gap-4 mt-auto p-2 ${isMinimized ? "w-[100px] h-[100px] justify-start" : ""}`}>
         <img 
           src="https://via.placeholder.com/40"
           alt="Profile" 
           className="w-10 h-10 rounded-full object-cover" 
+          onClick={toggleModal}
         />
+          <ProfileForm open={modalOpen} handleOpen={toggleModal}/>
         <div className={`${isMinimized ? "hidden" : ""}`}>
           <Typography variant="small" color="blue-gray" className="font-medium">
-            John Doe 
+           John Doe 
           </Typography>
           <Typography variant="small" color="blue-gray" className="text-xs">
             johndoe@example.com
