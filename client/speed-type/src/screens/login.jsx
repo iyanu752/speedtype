@@ -23,22 +23,30 @@ export default function Login() {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/login', {email, password})
-    .then(result => {
-      if (result.data === "success") {
-        navigate('/dashmain');
-        toast.success("Login Successful");
-      } else if (result.data === "password is incorrect") {
-        toast.error("Password is incorrect");
-      } else {
-        toast.error("No record existed");
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      toast.error("Login Failed");
-    });
-  }
+    axios
+      .post('http://localhost:3001/api/auth/login', { email, password })
+      .then((result) => {
+        const { message, userId } = result.data; // Destructure response
+        if (message === "Login successful") {
+          // Store userId in local storage (or handle it as needed)
+          localStorage.setItem("userId", userId);
+  
+          // Navigate to dashboard and show success toast
+          navigate('/dashmain');
+          toast.success(message);
+        } else if (message === "Password is incorrect") {
+          toast.error(message);
+        } else if (message === "No record found for this email") {
+          toast.error(message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Login Failed");
+      });
+  };
+  
+  
     return (
       <>
        <div className="flex h-screen font-roboto">

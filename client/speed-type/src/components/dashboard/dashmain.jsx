@@ -20,7 +20,7 @@ export default function Dashmain() {
                 </div>
             <div><MdOutlineSpeed className='h-5 w-5 text-blue' /></div>
             </div>
-             <div className="bg-white  flex flex-row justify-betweenshadow-sm border rounded-[10px] p-4 flex-1 max-w-[300px]">
+             <div className="bg-white  flex flex-row justify-between shadow-sm border rounded-[10px] p-4 flex-1 max-w-[300px]">
                 <div>
                 <h5 className="text-slate-800 text-t2 font-semibold">Accuracy</h5>
                 <p className="text-slate-600 font-bold text-h5">76%</p>

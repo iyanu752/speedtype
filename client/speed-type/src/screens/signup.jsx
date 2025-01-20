@@ -23,16 +23,24 @@ export default function Signup() {
 
   const submitSignin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/signup', {name, email, password})
-    .then(result => 
-      {console.log(result)})
-      navigate('/login')
-      toast.success("Sign Up Successful")
-    .catch(err => 
-      {console.log(err)
-        toast.error("sign up failed")
+    axios
+      .post("http://localhost:3001/api/auth/signup", { name, email, password }) // Adjusted to correct port
+      .then((result) => {
+        console.log(result);
+
+        if (result.data && result.data.userId) {
+          toast.success("Sign Up Successful");
+          navigate("/login");
+        } else {
+          toast.error("Sign Up Failed: " + (result.data.message || "Unknown error"));
+        }
       })
-  }
+      .catch((err) => {
+        console.error(err);
+        toast.error("Sign Up Failed: Server Error");
+      });
+  };
+
   return (
     <div className="flex h-screen font-roboto">
       {/* Left side: Blue background with logo at the top-left and image centered */}

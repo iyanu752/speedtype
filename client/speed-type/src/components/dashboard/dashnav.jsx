@@ -10,6 +10,7 @@ export default function Dashnav() {
   const [isMinimized, setIsMinimized] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const toggleModal = () => setModalOpen(!modalOpen);
+
   const isActive = (path) => location.pathname === path; 
 
   return (
