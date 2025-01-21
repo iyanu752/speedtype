@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Dialog,
@@ -6,58 +6,74 @@ import {
   DialogBody,
   DialogFooter,
   Avatar,
-  Input,
+//   Input,
 } from "@material-tailwind/react";
 import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
 import axios from "axios";
 
 export default function ProfileForm({ open, handleOpen }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+//   const [firstName, setFirstName] = useState("");
+//   const [lastName, setLastName] = useState("");
   const [avatar, setAvatar] = useState("https://via.placeholder.com/40");
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [images, setImages] = useState([]);
+  const [file, setFile] = useState(null);
 
   // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedFile(file);
-      setAvatar(URL.createObjectURL(file));
+      setFile(file);
+      setAvatar(URL.createObjectURL(file)); // Temporarily show selected avatar
+    }
+  };
+
+  const fetchImages = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/api/images/");
+      setImages(response.data);
+    } catch (error) {
+      console.error("Error fetching images:", error.response?.data || error.message);
     }
   };
 
   // Handle profile picture upload
   const handleUpload = async () => {
-    if (!selectedFile) {
-      alert("Please select a file to upload.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("profilePicture", selectedFile);
-    formData.append("userId", "12345"); // Replace with dynamic user ID
-
+    if (!file) return;
     try {
-      const response = await axios.post("http://localhost:3001/upload", formData);
-      alert(response.data.message);
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axios.post("http://localhost:3001/api/images/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Image uploaded successfully", response.data);
+      setAvatar(response.data.newImage.url); // Set the uploaded image as avatar
+      fetchImages(); // Refresh the image list
     } catch (error) {
-      console.error(error);
-      alert("Failed to upload the profile picture.");
+      console.error("Error uploading image:", error.response?.data || error.message);
     }
   };
 
   // Handle deleting the profile picture
-  const handleDelete = async () => {
+  const handleDelete = async (imageId) => {
     try {
-      await axios.delete(`http://localhost:3001/profile-picture/12345`); // Replace with dynamic user ID
-      setAvatar("https://via.placeholder.com/40");
+      await axios.delete(`http://localhost:3001/api/images/${imageId}`); // Use dynamic ID for deletion
+      setAvatar("https://via.placeholder.com/40"); // Reset avatar to default
       alert("Profile picture deleted successfully.");
+      fetchImages(); // Refresh the image list
     } catch (error) {
-      console.error(error);
+      console.error("Error deleting image:", error.response?.data || error.message);
       alert("Failed to delete the profile picture.");
     }
   };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
   return (
     <Dialog open={open} handler={handleOpen} className="rounded-[10px]">
@@ -84,16 +100,16 @@ export default function ProfileForm({ open, handleOpen }) {
             <Button
               variant="outline"
               className="flex bg-lightred hover:bg-darkred font-roboto font-semibold text-red rounded-[10px] items-center gap-2"
-              onClick={handleDelete}
+              onClick={() => handleDelete(images[0]?._id)} // Delete first image as an example
             >
               <MdDeleteOutline className="w-[24px]" />
               Delete
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-[32px]">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-[32px]">
             <Input label="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
             <Input label="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-          </div>
+          </div> */}
         </div>
       </DialogBody>
       <DialogFooter>

@@ -3,8 +3,7 @@ import Dashnav from "../components/dashboard/dashnav"
 export default function Dashboard() {
     return (
         <div className="flex flex-row">
-            <Dashnav/>
-            
+            <Dashnav/>      
             {/* <Dashmain/> */}
         </div>
     )

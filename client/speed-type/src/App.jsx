@@ -17,6 +17,9 @@ import Dashboard from './screens/dashboard';
 import Dashnav from './components/dashboard/dashnav';
 import Dashmain from './components/dashboard/dashmain';
 import LeaderboardTable from './components/leaderboard/leaderboardtable';
+import ChallengeList from './components/challenge/challengelist';
+import SpeedTyper from './components/challenge/game/speedtyper/speedtyper';
+
 function AppLayout({ children }) {
   const location = useLocation();
   const [showNavbarFooter, setShowNavbarFooter] = useState(true);
@@ -98,6 +101,14 @@ function App() {
     {
       path: '/dashleaderboard',
       element: <NavLayout><LeaderboardTable/></NavLayout>,
+    },
+    {
+      path: '/dashchallenges',
+      element: <NavLayout><ChallengeList/></NavLayout>
+    },
+    {
+      path: '/speedtyper',
+      element:<NavLayout><SpeedTyper/></NavLayout>
     }
   ]);
 
