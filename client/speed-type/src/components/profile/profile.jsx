@@ -10,8 +10,7 @@ import {
 } from "@material-tailwind/react";
 import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
-import axios from "axios";
-
+import axios from '../../config/axios'
 export default function ProfileForm({ open, handleOpen }) {
 //   const [firstName, setFirstName] = useState("");
 //   const [lastName, setLastName] = useState("");
@@ -28,9 +27,9 @@ export default function ProfileForm({ open, handleOpen }) {
     }
   };
 
-  const fetchImages = async () => {
+  const fetchImages = async (imageId) => {
     try {
-      const response = await axios.get("http://localhost:3001/api/images/");
+      const response = await axios.get(`http://localhost:3001/api/image/${imageId}`);
       setImages(response.data);
     } catch (error) {
       console.error("Error fetching images:", error.response?.data || error.message);
@@ -42,9 +41,10 @@ export default function ProfileForm({ open, handleOpen }) {
     if (!file) return;
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("userImage", file);
+      formData.append("peter", "parker")
 
-      const response = await axios.post("http://localhost:3001/api/images/upload", formData, {
+      const response = await axios.post(`http://localhost:3001/api/profile/image`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -61,8 +61,8 @@ export default function ProfileForm({ open, handleOpen }) {
   // Handle deleting the profile picture
   const handleDelete = async (imageId) => {
     try {
-      await axios.delete(`http://localhost:3001/api/images/${imageId}`); // Use dynamic ID for deletion
-      setAvatar("https://via.placeholder.com/40"); // Reset avatar to default
+      await axios.delete(`http://localhost:3001/api/image/${imageId}`); 
+      setAvatar("https://via.placeholder.com/40"); 
       alert("Profile picture deleted successfully.");
       fetchImages(); // Refresh the image list
     } catch (error) {

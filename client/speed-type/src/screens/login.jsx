@@ -26,10 +26,12 @@ export default function Login() {
     axios
       .post('http://localhost:3001/api/auth/login', { email, password })
       .then((result) => {
-        const { message, userId } = result.data; // Destructure response
+        const { message, user, userId, token } = result.data; // Destructure response
         if (message === "Login successful") {
           // Store userId in local storage (or handle it as needed)
           localStorage.setItem("userId", userId);
+          localStorage.setItem("token", token)
+          localStorage.setItem("user", JSON.stringify(user))
   
           // Navigate to dashboard and show success toast
           navigate('/dashmain');

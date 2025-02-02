@@ -1,5 +1,3 @@
-'use client';
-
 import  { useState, useEffect, useCallback } from 'react';
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
