@@ -8,7 +8,7 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import guest from '/assets/guest.png'
-import axios from 'axios';
+import { loginUser } from '../services/authservice';
 export default function Login() {
 
   const [email, setEmail] = useState("")
@@ -21,33 +21,17 @@ export default function Login() {
   }
 
 
-  const submitLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    axios
-      .post('http://localhost:3001/api/auth/login', { email, password })
-      .then((result) => {
-        const { message, user, userId, token } = result.data; // Destructure response
-        if (message === "Login successful") {
-          // Store userId in local storage (or handle it as needed)
-          localStorage.setItem("userId", userId);
-          localStorage.setItem("token", token)
-          localStorage.setItem("user", JSON.stringify(user))
-  
-          // Navigate to dashboard and show success toast
-          navigate('/dashmain');
-          toast.success(message);
-        } else if (message === "Password is incorrect") {
-          toast.error(message);
-        } else if (message === "No record found for this email") {
-          toast.error(message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Login Failed");
-      });
+
+    const result = await loginUser(email, password);
+    if (result.success) {
+      toast.success(result.message);
+      navigate("/dashmain");
+    } else {
+      toast.error(result.message);
+    }
   };
-  
   
     return (
       <>
@@ -66,7 +50,7 @@ export default function Login() {
           {/* Right side: Sign-up form */}
           <div className="w-1/2 flex justify-center items-center">
             <form
-             onSubmit={submitLogin}
+             onSubmit={handleLogin}
             className="w-2/3 max-w-sm">
               {/* Form Header */}
               <div className="flex flex-col items-center text-center justify-center mb-6">

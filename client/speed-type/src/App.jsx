@@ -49,10 +49,10 @@ function NavLayout ({children}) {
 }
 
 NavLayout.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node,
 }
 AppLayout.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node,
 };
 
 

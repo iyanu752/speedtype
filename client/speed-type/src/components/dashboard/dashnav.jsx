@@ -13,12 +13,20 @@ import {
   MdGames,
   MdHelpCenter,
   MdArrowForwardIos,
+  MdLogout 
 } from "react-icons/md";
 import ProfileForm from "../profile/profile";
 import logo from "/assets/speedlogo.svg";
+import axios from "../../config/axios";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import API_ENDPOINTS from "../../config/endpoints";
+
 
 export default function Dashnav() {
   const location = useLocation();
+  const navigate = useNavigate()
   const [isMinimized, setIsMinimized] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const toggleModal = () => setModalOpen(!modalOpen);
@@ -26,6 +34,27 @@ export default function Dashnav() {
   const isActive = (path) => location.pathname === path;
 
   const [user, setUser] = useState({});
+
+  const Logout = () => {
+    axios
+      .post(API_ENDPOINTS.LOGOUT)
+      .then((result) => {
+        console.log(result);
+
+        if (result.data && result.data.message) {
+          localStorage.removeItem("token")
+          toast.success("Logout Successful");
+          navigate("/login");
+        } else {
+          toast.error("Logout Failed: " + (result.data.message || "Unknown error"));
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Sign Up Failed: Server Error");
+      });
+
+  }
   
   useEffect (() => {
     if(localStorage.getItem('user')) {
@@ -139,6 +168,9 @@ export default function Dashnav() {
            {user.email || "email@example.com"}
           </Typography>
         </div>
+      </div>
+      <div className="flex p-2 flex-row font-bold items-center gap-[16px]" onClick={Logout}>
+          <span className={`${isMinimized ? "hidden" : ""}`}>Logout</span> <MdLogout/>
       </div>
     </Card>
   );

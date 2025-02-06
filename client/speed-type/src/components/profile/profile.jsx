@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Button,
   Dialog,
@@ -10,11 +12,11 @@ import {
 } from "@material-tailwind/react";
 import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
-import axios from '../../config/axios'
+// import axios from '../../config/axios'
+import { uploadProfileImage, fetchImages, deleteProfileImage }from "../../services/imageservice";
 export default function ProfileForm({ open, handleOpen }) {
-//   const [firstName, setFirstName] = useState("");
-//   const [lastName, setLastName] = useState("");
-  const [avatar, setAvatar] = useState("https://via.placeholder.com/40");
+
+  const [avatar, setAvatar] = useState("https://i.pravatar.cc/300");
   const [images, setImages] = useState([]);
   const [file, setFile] = useState(null);
 
@@ -23,48 +25,44 @@ export default function ProfileForm({ open, handleOpen }) {
     const file = e.target.files[0];
     if (file) {
       setFile(file);
-      setAvatar(URL.createObjectURL(file)); // Temporarily show selected avatar
+      setAvatar(URL.createObjectURL(file)); 
     }
   };
 
-  const fetchImages = async (imageId) => {
+  const fetchImage = async () => {
+    const userData = localStorage.getItem('user')
+    const userId = userData.profileImg
     try {
-      const response = await axios.get(`http://localhost:3001/api/image/${imageId}`);
-      setImages(response.data);
+    const profileImg = await fetchImages(userId);
+    setImages(profileImg)
     } catch (error) {
       console.error("Error fetching images:", error.response?.data || error.message);
-    }
+    } 
   };
 
-  // Handle profile picture upload
+
   const handleUpload = async () => {
-    if (!file) return;
     try {
-      const formData = new FormData();
-      formData.append("userImage", file);
-      formData.append("peter", "parker")
-
-      const response = await axios.post(`http://localhost:3001/api/profile/image`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Image uploaded successfully", response.data);
-      setAvatar(response.data.newImage.url); // Set the uploaded image as avatar
-      fetchImages(); // Refresh the image list
+      const imageUrl = await uploadProfileImage(file);
+      if (imageUrl) {
+        setAvatar(imageUrl);
+        toast.success("Profile picture uploaded sucessfully")
+        fetchImage()
+      }
     } catch (error) {
-      console.error("Error uploading image:", error.response?.data || error.message);
+      console.error("upload failed", error)
     }
   };
 
   // Handle deleting the profile picture
-  const handleDelete = async (imageId) => {
+  const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/api/image/${imageId}`); 
+      const userData = localStorage.getItem('user')
+      const userId = userData.profileImg
+      await deleteProfileImage(userId)
       setAvatar("https://via.placeholder.com/40"); 
-      alert("Profile picture deleted successfully.");
-      fetchImages(); // Refresh the image list
+      toast.sucess("Profile picture deleted successfully.");
+      fetchImage();
     } catch (error) {
       console.error("Error deleting image:", error.response?.data || error.message);
       alert("Failed to delete the profile picture.");
@@ -72,7 +70,7 @@ export default function ProfileForm({ open, handleOpen }) {
   };
 
   useEffect(() => {
-    fetchImages();
+    fetchImage()
   }, []);
 
   return (
@@ -100,7 +98,7 @@ export default function ProfileForm({ open, handleOpen }) {
             <Button
               variant="outline"
               className="flex bg-lightred hover:bg-darkred font-roboto font-semibold text-red rounded-[10px] items-center gap-2"
-              onClick={() => handleDelete(images[0]?._id)} // Delete first image as an example
+              onClick={() => handleDelete(images[0]?._id)} 
             >
               <MdDeleteOutline className="w-[24px]" />
               Delete

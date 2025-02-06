@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { signUpUser } from '../services/authservice';
 export default function Signup() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -21,24 +21,15 @@ export default function Signup() {
     setShowPassword(!showPassword);
   }
 
-  const submitSignin = (e) => {
+  const submitSignin = async (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3001/api/auth/signup", { name, email, password }) // Adjusted to correct port
-      .then((result) => {
-        console.log(result);
-
-        if (result.data && result.data.userId) {
-          toast.success("Sign Up Successful");
-          navigate("/login");
-        } else {
-          toast.error("Sign Up Failed: " + (result.data.message || "Unknown error"));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Sign Up Failed: Server Error");
-      });
+    const response = await signUpUser(name, email, password);
+    if(response.success) {
+      toast.success(response.message)
+      navigate("/login");
+    }else {
+      toast.error(response.message);
+    }
   };
 
   return (
