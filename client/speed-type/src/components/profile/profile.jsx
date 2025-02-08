@@ -13,11 +13,10 @@ import {
 import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
 // import axios from '../../config/axios'
-import { uploadProfileImage, fetchImages, deleteProfileImage }from "../../services/imageservice";
-export default function ProfileForm({ open, handleOpen }) {
-
-  const [avatar, setAvatar] = useState("https://i.pravatar.cc/300");
-  const [images, setImages] = useState([]);
+import { uploadProfileImage,fetchImages, deleteProfileImage }from "../../services/imageservice";
+export default function ProfileForm({ userProfileImage, onUploadSuccess, open, handleOpen }) {
+  const [avatar, setAvatar] = useState("");
+  // const [images, setImages] = useState([]);
   const [file, setFile] = useState(null);
 
   // Handle file selection
@@ -30,11 +29,9 @@ export default function ProfileForm({ open, handleOpen }) {
   };
 
   const fetchImage = async () => {
-    const userData = localStorage.getItem('user')
-    const userId = userData.profileImg
     try {
-    const profileImg = await fetchImages(userId);
-    setImages(profileImg)
+    const user = await fetchImages();
+    console.log(user)
     } catch (error) {
       console.error("Error fetching images:", error.response?.data || error.message);
     } 
@@ -47,41 +44,47 @@ export default function ProfileForm({ open, handleOpen }) {
       if (imageUrl) {
         setAvatar(imageUrl);
         toast.success("Profile picture uploaded sucessfully")
-        fetchImage()
+        setTimeout(() => {
+          handleOpen()
+        }, 500);
+        setAvatar(imageUrl)
+        onUploadSuccess(imageUrl)
       }
     } catch (error) {
       console.error("upload failed", error)
+      toast.error("Failed to upload image")
     }
   };
 
   // Handle deleting the profile picture
-  const handleDelete = async () => {
-    try {
-      const userData = localStorage.getItem('user')
-      const userId = userData.profileImg
-      await deleteProfileImage(userId)
-      setAvatar("https://via.placeholder.com/40"); 
-      toast.sucess("Profile picture deleted successfully.");
-      fetchImage();
-    } catch (error) {
-      console.error("Error deleting image:", error.response?.data || error.message);
-      alert("Failed to delete the profile picture.");
-    }
-  };
+  // const handleDelete = async () => {
+  //   try {
+  //     const userData = localStorage.getItem('user')
+  //     const userId = userData.profileImg
+  //     await deleteProfileImage(userId)
+  //     setAvatar("https://via.placeholder.com/40"); 
+  //     toast.sucess("Profile picture deleted successfully.");
+  //     // fetchImage();
+  //   } catch (error) {
+  //     console.error("Error deleting image:", error.response?.data || error.message);
+  //     alert("Failed to delete the profile picture.");
+  //   }
+  // };
 
   useEffect(() => {
-    fetchImage()
-  }, []);
+    setAvatar(userProfileImage)
+    fetchImage() //todo: rework this and user as user service
+  }, [userProfileImage]);
 
   return (
-    <Dialog open={open} handler={handleOpen} className="rounded-[10px]">
+    <Dialog  open={open} handler={handleOpen} className="rounded-[10px]">
       <DialogHeader>Profile</DialogHeader>
       <DialogBody>
         <div className="flex flex-col justify-center items-center">
           <Avatar src={avatar} alt="avatar" withBorder={false} className="p-4 w-32 h-32" />
           <div className="flex gap-[16px] py-[24px] items-center flex-row">
             <Button
-              variant="outline"
+              variant="outlined"
               className="flex bg-light-blue-100 hover:bg-light-blue-200 font-roboto font-semibold text-black rounded-[10px] items-center gap-2"
               onClick={() => document.getElementById("fileInput").click()}
             >
@@ -96,9 +99,9 @@ export default function ProfileForm({ open, handleOpen }) {
               onChange={handleFileChange}
             />
             <Button
-              variant="outline"
+              variant="outlined"
               className="flex bg-lightred hover:bg-darkred font-roboto font-semibold text-red rounded-[10px] items-center gap-2"
-              onClick={() => handleDelete(images[0]?._id)} 
+              // onClick={() => handleDelete(images[0]?._id)} 
             >
               <MdDeleteOutline className="w-[24px]" />
               Delete
@@ -125,4 +128,6 @@ export default function ProfileForm({ open, handleOpen }) {
 ProfileForm.propTypes = {
   open: PropTypes.bool.isRequired,
   handleOpen: PropTypes.func.isRequired,
+  onUploadSuccess: PropTypes.func.isRequired,
+  userProfileImage: PropTypes.string,
 };

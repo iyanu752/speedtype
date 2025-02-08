@@ -35,6 +35,23 @@ const signUpUser = async (name, email, password) => {
       return { success: false, message: "Sign Up Failed: Server Error" };
     }
   };
+
+  const logoutUser = async () =>  {
+
+    try {
+      const response = await axios.post (API_ENDPOINTS.LOGOUT)
+      if(response.data && response.data.message) {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        return {success: true, message: "Logout sucessful"}
+      }  
+    } catch (error) {
+      console.error("Logout failed", error.response?.data || error.message)
+      return {sucess: false, message: "Logout failed"}
+    }
+   
+  }
   
 
- export {loginUser, signUpUser};
+ export {loginUser, signUpUser, logoutUser};

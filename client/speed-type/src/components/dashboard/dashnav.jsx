@@ -17,11 +17,10 @@ import {
 } from "react-icons/md";
 import ProfileForm from "../profile/profile";
 import logo from "/assets/speedlogo.svg";
-import axios from "../../config/axios";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import API_ENDPOINTS from "../../config/endpoints";
+import { logoutUser } from "../../services/authservice";
 
 
 export default function Dashnav() {
@@ -35,26 +34,21 @@ export default function Dashnav() {
 
   const [user, setUser] = useState({});
 
-  const Logout = () => {
-    axios
-      .post(API_ENDPOINTS.LOGOUT)
-      .then((result) => {
-        console.log(result);
 
-        if (result.data && result.data.message) {
-          localStorage.removeItem("token")
-          toast.success("Logout Successful");
-          navigate("/login");
-        } else {
-          toast.error("Logout Failed: " + (result.data.message || "Unknown error"));
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Sign Up Failed: Server Error");
-      });
-
+  const logout = async () => {
+    const response = await logoutUser();
+    if(response.success) {
+      toast.success(response.message)
+      navigate("/login");
+    }else {
+      toast.error(response.message)
+    }
   }
+
+  const onUploadSuccess = (imageUrl) => {
+    setUser({...user, profileImg: imageUrl})
+  }
+
   
   useEffect (() => {
     if(localStorage.getItem('user')) {
@@ -159,7 +153,7 @@ export default function Dashnav() {
           className="w-10 h-10 rounded-full object-cover"
           onClick={toggleModal}
         />
-        <ProfileForm open={modalOpen} handleOpen={toggleModal} />
+        <ProfileForm userProfileImage={user.profileImg} onUploadSuccess={onUploadSuccess} open={modalOpen} handleOpen={toggleModal} />
         <div className={`${isMinimized ? "hidden" : ""}`}>
           <Typography variant="small" color="blue-gray" className="font-medium">
             {user.name || "john doe"}
@@ -169,7 +163,7 @@ export default function Dashnav() {
           </Typography>
         </div>
       </div>
-      <div className="flex p-2 flex-row font-bold items-center gap-[16px]" onClick={Logout}>
+      <div className="flex p-2 flex-row font-bold items-center gap-[16px]" onClick={logout}>
           <span className={`${isMinimized ? "hidden" : ""}`}>Logout</span> <MdLogout/>
       </div>
     </Card>
