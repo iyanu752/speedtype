@@ -21,7 +21,7 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from "../../services/authservice";
-
+import { fetchImages } from "../../services/imageservice";
 
 export default function Dashnav() {
   const location = useLocation();
@@ -33,6 +33,7 @@ export default function Dashnav() {
   const isActive = (path) => location.pathname === path;
 
   const [user, setUser] = useState({});
+  const [users, setUsers] = useState({})
 
 
   const logout = async () => {
@@ -45,15 +46,25 @@ export default function Dashnav() {
     }
   }
 
-  const onUploadSuccess = (imageUrl) => {
-    setUser({...user, profileImg: imageUrl})
+  const onUploadSuccess = async (imageUrl) => {
+    const users = await fetchImages()
+    setUser({...users.user, profileImg: imageUrl})
   }
 
-  
+  const fetchUser = async () => {
+    try {
+    const users = await fetchImages();
+    setUsers(users.user)
+    } catch (error) {
+      console.error("Error fetching images:", error.response?.data || error.message);
+    } 
+  };
+
   useEffect (() => {
     if(localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
     }
+    fetchUser()
   }, []) 
 
   return (
@@ -156,10 +167,10 @@ export default function Dashnav() {
         <ProfileForm userProfileImage={user.profileImg} onUploadSuccess={onUploadSuccess} open={modalOpen} handleOpen={toggleModal} />
         <div className={`${isMinimized ? "hidden" : ""}`}>
           <Typography variant="small" color="blue-gray" className="font-medium">
-            {user.name || "john doe"}
+            {users.name || "john doe"}
           </Typography>
           <Typography variant="small" color="blue-gray" className="text-xs">
-           {user.email || "email@example.com"}
+           {users.email || "email@example.com"}
           </Typography>
         </div>
       </div>

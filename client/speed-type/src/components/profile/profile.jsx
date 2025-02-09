@@ -13,7 +13,7 @@ import {
 import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
 // import axios from '../../config/axios'
-import { uploadProfileImage,fetchImages, deleteProfileImage }from "../../services/imageservice";
+import { uploadProfileImage, deleteProfileImage }from "../../services/imageservice";
 export default function ProfileForm({ userProfileImage, onUploadSuccess, open, handleOpen }) {
   const [avatar, setAvatar] = useState("");
   // const [images, setImages] = useState([]);
@@ -28,14 +28,6 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
     }
   };
 
-  const fetchImage = async () => {
-    try {
-    const user = await fetchImages();
-    console.log(user)
-    } catch (error) {
-      console.error("Error fetching images:", error.response?.data || error.message);
-    } 
-  };
 
 
   const handleUpload = async () => {
@@ -73,7 +65,7 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
 
   useEffect(() => {
     setAvatar(userProfileImage)
-    fetchImage() //todo: rework this and user as user service
+     //todo: rework this and user as user service
   }, [userProfileImage]);
 
   return (
