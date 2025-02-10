@@ -13,7 +13,7 @@ import {
 import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
 import PropTypes from "prop-types";
 // import axios from '../../config/axios'
-import { uploadProfileImage, deleteProfileImage }from "../../services/imageservice";
+import { uploadProfileImage, deleteProfileImage}from "../../services/imageservice";
 export default function ProfileForm({ userProfileImage, onUploadSuccess, open, handleOpen }) {
   const [avatar, setAvatar] = useState("");
   // const [images, setImages] = useState([]);
@@ -45,23 +45,25 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
     } catch (error) {
       console.error("upload failed", error)
       toast.error("Failed to upload image")
+      setTimeout(() => {
+        handleOpen()
+      }, 500);
     }
   };
 
-  // Handle deleting the profile picture
-  // const handleDelete = async () => {
-  //   try {
-  //     const userData = localStorage.getItem('user')
-  //     const userId = userData.profileImg
-  //     await deleteProfileImage(userId)
-  //     setAvatar("https://via.placeholder.com/40"); 
-  //     toast.sucess("Profile picture deleted successfully.");
-  //     // fetchImage();
-  //   } catch (error) {
-  //     console.error("Error deleting image:", error.response?.data || error.message);
-  //     alert("Failed to delete the profile picture.");
-  //   }
-  // };
+  const handleDelete = async () => {
+    try{
+      const deleteImageUrl = await deleteProfileImage()
+      if(deleteImageUrl) {
+        setAvatar(deleteImageUrl)
+        toast.success('Profile image deleted successfully')
+      }
+
+    }catch (error){
+        console.error("Error deleting profile image", error)
+        toast.error("Could not delete profile image")
+    }
+  }
 
   useEffect(() => {
     setAvatar(userProfileImage)
@@ -93,7 +95,7 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
             <Button
               variant="outlined"
               className="flex bg-lightred hover:bg-darkred font-roboto font-semibold text-red rounded-[10px] items-center gap-2"
-              // onClick={() => handleDelete(images[0]?._id)} 
+              onClick={handleDelete} 
             >
               <MdDeleteOutline className="w-[24px]" />
               Delete

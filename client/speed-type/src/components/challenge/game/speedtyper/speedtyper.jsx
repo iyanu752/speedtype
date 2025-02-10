@@ -1,7 +1,6 @@
 import  { useState, useEffect, useCallback } from 'react';
 import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
-import { Progress } from "@material-tailwind/react";
 import { useTimer } from '../../../../reusables/usetimer';
 import { useWordGenerator } from './wordgenerator';
 
@@ -10,7 +9,7 @@ const SpeedTyper = () => {
   const [wordIndex, setWordIndex] = useState(0);
   const [correctChars, setCorrectChars] = useState(0);
   const [startTime, setStartTime] = useState(null);
-  const { time, isRunning, startTimer, stopTimer, resetTimer } = useTimer(60);
+  const { time, startTimer, stopTimer, resetTimer } = useTimer(60);
   const { currentWords, generateWords } = useWordGenerator();
   const [gameState, setGameState] = useState('idle');
 
@@ -71,6 +70,16 @@ const SpeedTyper = () => {
     return Math.round((correctChars / totalChars) * 100) || 0;
   };
 
+  const resetGame = useCallback(() => {
+    setGameState('idle');
+    setUserInput('');
+    setWordIndex(0);
+    setCorrectChars(0);
+    setStartTime(null);
+    resetTimer();
+    generateWords(50);
+  }, [resetTimer, generateWords]);
+
   return (
     <div className="h-screen w-full  flex items-center justify-center">
       <div className="bg-white border rounded-[10px] p-8 shadow-md w-full max-w-2xl">
@@ -78,12 +87,16 @@ const SpeedTyper = () => {
         
         <div className="mb-6 flex justify-between items-center">
           <div className="text-2xl font-semibold">Time: {time}s</div>
-          <Button className='bg-blue rounded-[10px]' onClick={gameState === 'idle' ? startGame : resetTimer}>
-            {gameState === 'idle' ? 'Start Game' : 'Reset'}
+          <Button className='bg-blue rounded-[10px]' onClick={gameState === 'idle' ? startGame : resetGame}>
+          {gameState === 'idle' ? 'Start Game' : 'Reset'}
           </Button>
         </div>
-
-        <Progress value={(60 - time) / 60 * 100} className="mb-6" />
+{/* 
+        <Progress value={((60 - time) / 60) * 100} className="mb-6" /> */}
+        <div 
+            className=" bg-blue h-3 rounded-full transition-all duration-300"
+            style={{ width: `${((60 - time) / 60) * 100}%` }}
+          ></div>
 
         <div className="mb-6 p-4 bg-gray-100 rounded text-lg font-mono min-h-[100px]">
           {currentWords.slice(wordIndex, wordIndex + 10).join(' ')}
@@ -97,13 +110,13 @@ const SpeedTyper = () => {
           disabled={gameState !== 'playing'}
         />
 
-        <div className="grid grid-cols-2 gap-4 text-center">
+        <div className="grid py-4 grid-cols-2 gap-4 text-center">
           <div className="bg-blue-100 p-4 rounded">
-            <div className="text-2xl font-bold">{calculateWPM()}</div>
+            <div className="text-2xl font-bold">{String(calculateWPM())}</div>
             <div className="text-sm text-gray-600">Words per minute</div>
           </div>
           <div className="bg-green-100 p-4 rounded">
-            <div className="text-2xl font-bold">{calculateAccuracy()}%</div>
+            <div className="text-2xl font-bold">{String(calculateAccuracy())}%</div>
             <div className="text-sm text-gray-600">Accuracy</div>
           </div>
         </div>
@@ -111,7 +124,7 @@ const SpeedTyper = () => {
         {gameState === 'finished' && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold mb-2">Game Over!</h2>
-            <p>You typed {calculateWPM()} words per minute with {calculateAccuracy()}% accuracy.</p>
+            <p>You typed {String(calculateWPM())} words per minute with {String(calculateAccuracy())}% accuracy.</p>
           </div>
         )}
       </div>

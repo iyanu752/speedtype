@@ -48,7 +48,7 @@ export default function Dashnav() {
 
   const onUploadSuccess = async (imageUrl) => {
     const users = await fetchImages()
-    setUser({...users.user, profileImg: imageUrl})
+    setUser({...users, profileImg: imageUrl})
   }
 
   const fetchUser = async () => {
@@ -174,9 +174,15 @@ export default function Dashnav() {
           </Typography>
         </div>
       </div>
-      <div className="flex p-2 flex-row font-bold items-center gap-[16px]" onClick={logout}>
-          <span className={`${isMinimized ? "hidden" : ""}`}>Logout</span> <MdLogout/>
-      </div>
+        <ListItem
+        onClick={logout}
+        className="hover:text-blue hover:bg-light-blue-50 cursor-pointer flex items-center"
+      >
+        <ListItemPrefix>
+          <MdLogout className="h-5 w-5 text-red" />
+        </ListItemPrefix>
+        {!isMinimized && <span className="font-bold text-red">Logout</span>}
+  </ListItem>
     </Card>
   );
 }

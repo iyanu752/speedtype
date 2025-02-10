@@ -35,12 +35,10 @@ const fetchImages = async () => {
 };
 
 
-const deleteProfileImage = async(userId) => {
-    if (!userId) return null;
+const deleteProfileImage = async() => {
     try {
-        const response = await axios.delete(API_ENDPOINTS.DELETE_PROFILE_IMAGE(userId));
+        const response = await axios.delete(API_ENDPOINTS.DELETE_PROFILE_IMAGE);
         return response.data.profileImg;
-
     }catch (error) {
         console.error("Eror deleting profile image", error.response?.data || error.message)
     }

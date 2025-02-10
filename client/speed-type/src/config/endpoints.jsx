@@ -6,7 +6,7 @@ const API_ENDPOINTS = {
   LOGOUT: `${BASE_URL}/auth/logout`,
   UPLOAD_PROFILE_IMAGE: `${BASE_URL}/profile/image`,
   FETCH_PROFILE_IMAGE: `${BASE_URL}/profile/image`,
-  DELETE_PROFILE_IMAGE: `${BASE_URL}/image`,
+  DELETE_PROFILE_IMAGE: `${BASE_URL}/profile/image`,
 };
 
 export default API_ENDPOINTS;
