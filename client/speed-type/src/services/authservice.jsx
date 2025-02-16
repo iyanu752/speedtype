@@ -21,9 +21,9 @@ const loginUser = async (email, password) => {
     }
   };
  
-const signUpUser = async (name, email, password) => {
+const signUpUser = async (name, country, email, password) => {
     try {
-      const response = await axios.post(API_ENDPOINTS.SIGNUP, { name, email, password });
+      const response = await axios.post(API_ENDPOINTS.SIGNUP, { name, country, email, password });
   
       if (response.data && response.data.userId) {
         return { success: true, message: "Sign Up Successful" };

@@ -7,6 +7,11 @@ const API_ENDPOINTS = {
   UPLOAD_PROFILE_IMAGE: `${BASE_URL}/profile/image`,
   FETCH_PROFILE_IMAGE: `${BASE_URL}/profile/image`,
   DELETE_PROFILE_IMAGE: `${BASE_URL}/profile/image`,
+  POST_DASH_STATS: `${BASE_URL}/dashstat/dashstats`,
+  GET_DASH_STATS: `${BASE_URL}/dashstat/dashstats`,
+  GET_AREA_STATS: `${BASE_URL}/dashstat/performance-history`,
+  GET_LEADERBOARD: `${BASE_URL}/dashstat/leaderboard`
+
 };
 
 export default API_ENDPOINTS;

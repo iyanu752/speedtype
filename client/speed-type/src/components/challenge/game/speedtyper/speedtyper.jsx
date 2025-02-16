@@ -3,7 +3,8 @@ import { Button } from "@material-tailwind/react";
 import { Input } from "@material-tailwind/react";
 import { useTimer } from '../../../../reusables/usetimer';
 import { useWordGenerator } from './wordgenerator';
-
+import {postDashboardStats} from '../../../../services/dashstatsservice'
+// import axios from '../../../../config/axios'
 const SpeedTyper = () => {
   const [userInput, setUserInput] = useState('');
   const [wordIndex, setWordIndex] = useState(0);
@@ -12,7 +13,8 @@ const SpeedTyper = () => {
   const { time, startTimer, stopTimer, resetTimer } = useTimer(60);
   const { currentWords, generateWords } = useWordGenerator();
   const [gameState, setGameState] = useState('idle');
-
+  const [wpm, setWpm] = useState (0)
+  const [accuracy, setAccuracy] = useState(0);
   useEffect(() => {
     generateWords(50);
   }, [generateWords]);
@@ -35,6 +37,11 @@ const SpeedTyper = () => {
   useEffect(() => {
     if (time === 0) {
       endGame();
+      const newWpm = calculateWPM();
+      const newAccuracy = calculateAccuracy();
+      setWpm(newWpm);
+      setAccuracy(newAccuracy);
+      postDashboard()
     }
   }, [time, endGame]);
 
@@ -69,6 +76,13 @@ const SpeedTyper = () => {
     const totalChars = currentWords.slice(0, wordIndex).join(' ').length;
     return Math.round((correctChars / totalChars) * 100) || 0;
   };
+
+  const postDashboard = async () => {
+    const response = await postDashboardStats(wpm, accuracy);
+    if (response.success) {
+      console.log('data posted')
+    }
+  }
 
   const resetGame = useCallback(() => {
     setGameState('idle');
@@ -112,11 +126,11 @@ const SpeedTyper = () => {
 
         <div className="grid py-4 grid-cols-2 gap-4 text-center">
           <div className="bg-blue-100 p-4 rounded">
-            <div className="text-2xl font-bold">{String(calculateWPM())}</div>
+            <div className="text-2xl font-bold">{String(wpm)}</div>
             <div className="text-sm text-gray-600">Words per minute</div>
           </div>
           <div className="bg-green-100 p-4 rounded">
-            <div className="text-2xl font-bold">{String(calculateAccuracy())}%</div>
+            <div className="text-2xl font-bold">{String(accuracy)}%</div>
             <div className="text-sm text-gray-600">Accuracy</div>
           </div>
         </div>
@@ -124,7 +138,7 @@ const SpeedTyper = () => {
         {gameState === 'finished' && (
           <div className="mt-6 text-center">
             <h2 className="text-2xl font-bold mb-2">Game Over!</h2>
-            <p>You typed {String(calculateWPM())} words per minute with {String(calculateAccuracy())}% accuracy.</p>
+            <p>You typed {String(wpm)} words per minute with {String(accuracy)}% accuracy.</p>
           </div>
         )}
       </div>
