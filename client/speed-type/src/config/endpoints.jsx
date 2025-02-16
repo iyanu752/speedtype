@@ -10,7 +10,9 @@ const API_ENDPOINTS = {
   POST_DASH_STATS: `${BASE_URL}/dashstat/dashstats`,
   GET_DASH_STATS: `${BASE_URL}/dashstat/dashstats`,
   GET_AREA_STATS: `${BASE_URL}/dashstat/performance-history`,
-  GET_LEADERBOARD: `${BASE_URL}/dashstat/leaderboard`
+  GET_LEADERBOARD: `${BASE_URL}/dashstat/leaderboard`,
+  GET_BARSTATS: `${BASE_URL}/dashstat/barstats`,
+  GET_TOTAL_STATS: `${BASE_URL}/dashstat/totalstats`
 
 };
 

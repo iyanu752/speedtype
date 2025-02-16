@@ -1,13 +1,35 @@
 import Chart from 'react-apexcharts';
+import { useState, useEffect } from "react";
+import { getBarStats } from '../services/dashstatsservice';
 
 const Bar = () => {
+    const [seriesData, setSeriesData] = useState ([0,0,0,0,0,0,0]) ;
+    const dayOfTheWeek = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    const fetchData = async () => {
+      try {
+        const highestScores = await getBarStats();
+        const performanceScores = dayOfTheWeek.map((day) => {
+          const stat = highestScores.find((entry) => entry.day === day);
+          return stat ? parseFloat(stat.performanceScore).toFixed(2) : 0;
+        });
+        setSeriesData(performanceScores);
+      } catch (error) {
+        console.error("Error fetching highest scores:", error);
+      }
+    };
+
+    useEffect(() => {
+      fetchData()
+    }, [])
+  
   const chartConfig = {
     type: "bar",
     height: 240,
     series: [
       {
-        name: "Sales",
-        data: [50, 40, 300, 320, 500, 350, 200, ],
+        name: "Highest Performance Score",
+        data: seriesData,
       },
     ],
     options: {
@@ -44,15 +66,7 @@ const Bar = () => {
           fontWeight: 400,
         },
       },
-      categories: [
-        "Mon",
-        "Tue",
-        "Wed",
-        "Thu",
-        "Fri",
-        "Sat",
-        "Sun",
-      ],
+      categories: dayOfTheWeek,
       position: 'bottom', 
     },
     yaxis: {
@@ -90,6 +104,7 @@ const Bar = () => {
 
   return (
     <div className="bar">
+      <h5 className='text-h5 font-bold font-roboto p-[8px]'>HIGHEST PERFORMANCE SCORE</h5>
       <Chart options={chartConfig.options} series={chartConfig.series} type="bar" width="100%" height={'300'} />
     </div>
   );

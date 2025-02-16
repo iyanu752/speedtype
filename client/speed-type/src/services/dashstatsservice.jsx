@@ -28,12 +28,21 @@ const getCardStatistics = async () => {
 const getAreaStatistics = async () => {
     try {
         const response = await axios.get(API_ENDPOINTS.GET_AREA_STATS);
-        console.log('response', response)
         return response.data;
     } catch (error) {
         console.error ("Error fetching area stat data", error);
         return null;
     } 
+}
+
+const getBarStats = async () => {
+    try {
+        const response = await axios.get(API_ENDPOINTS.GET_BARSTATS);
+        return response.data;
+    }catch (error) {
+        console.error ("Error fetching area stat data", error);
+        return null;
+    }
 }
 
 const getLeaderboard = async () => {
@@ -46,4 +55,14 @@ const getLeaderboard = async () => {
     }
 }
 
-export {postDashboardStats, getCardStatistics, getAreaStatistics, getLeaderboard};
+const getTotalStats = async () => {
+    try {
+        const response = await axios.get(API_ENDPOINTS.GET_TOTAL_STATS)
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching total data", error);
+        return null;
+    }
+}
+
+export {postDashboardStats, getCardStatistics, getAreaStatistics, getLeaderboard, getBarStats, getTotalStats};

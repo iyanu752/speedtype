@@ -1,11 +1,12 @@
 import Bar from '../../charts/bar'
-import Rader from '../../charts/rader'
+// import Rader from '../../charts/rader'
 import Area from '../../charts/area'
 import { MdOutlineSpeed } from "react-icons/md";
 import { MdAccessAlarm } from "react-icons/md";
 import { MdOutlineElectricBolt } from "react-icons/md";
 import { MdInsights } from "react-icons/md";
 import LeaderboardTable from '../leaderboard/leaderboardtable';
+import Statistics from '../statistics/statistics';
 import { useState, useEffect } from 'react';
 import { getCardStatistics } from '../../services/dashstatsservice';
 
@@ -38,6 +39,7 @@ export default function Dashmain() {
 
     return (
       <div className="flex flex-col w-full px-4 py-8 bg-white font-roboto overflow-y-auto h-screen">
+        <h4 className=" text-h4 font-bold font-roboto pb-[32px] text-slate-800"> DASHBOARD </h4>
         {/* Stat Cards */}
         <div className="flex flex-wrap justify-between gap-4">
             <div className="bg-white flex flex-row justify-between shadow-sm border rounded-[10px] p-4 flex-1 max-w-[300px]">
@@ -92,11 +94,11 @@ export default function Dashmain() {
         <div className="bg-white flex justify-center items-center shadow-sm border rounded-[10px] p-4 overflow-hidden w-[30%]">
             <Bar />
         </div> 
-        <div className="bg-white flex justify-center items-center shadow-sm border rounded-[10px] p-4 overflow-hidden w-[25%] ">
+        {/* <div className="bg-white flex justify-center items-center shadow-sm border rounded-[10px] p-4 overflow-hidden w-[25%] ">
             <Rader />
-        </div> 
-        <div className="bg-white shadow-sm border rounded-[10px] p-4 overflow-hidden flex-grow">
-            <LeaderboardTable />
+        </div>  */}
+        <div className="bg-white  flex flex-col justify-start  shadow-sm border rounded-[10px] p-4 overflow-hidden flex-grow">
+            <Statistics/>
         </div>
         </div>
 

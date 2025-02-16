@@ -28,7 +28,7 @@ export default function LeaderboardTable() {
 
   return (
     <div className="w-full bg-white">
-      <h4 className=" text-h4 font-bold font-roboto p-[8px] text-slate-800"> LEADERBOARD </h4>
+      <h4 className=" text-h4 font-bold font-roboto p-[24px] text-slate-800"> LEADERBOARD </h4>
       <Card className="h-full w-full">
         <table className="w-full min-w-max table-auto">
           <thead>
@@ -48,7 +48,7 @@ export default function LeaderboardTable() {
                 <td>{rank}</td>
                 <td>{username}</td>
                 <td className="flex  text-center items-center justify-center flex-row gap-[8px]">{countryName} <img className="w-[24px] h-[16px]" src={countryFlag} alt=" country flag" /></td>
-                <td>{highestPerformanceScore.toFixed(2)}</td>
+                <td>{highestPerformanceScore.toFixed(0)}</td>
               </tr>
             ))}
           </tbody>
