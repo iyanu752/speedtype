@@ -10,7 +10,6 @@ export default function LeaderboardTable() {
   const fetchLeaderboard = async () => {
     try {
       const response = await getLeaderboard();
-
       if (response.success && Array.isArray(response.leaderboard)) {
         setLeaderboard(response.leaderboard);
       } else {
@@ -27,15 +26,15 @@ export default function LeaderboardTable() {
   }, []);
 
   return (
-    <div className="w-full bg-white">
-      <h4 className=" text-h4 font-bold font-roboto p-[24px] text-slate-800"> LEADERBOARD </h4>
-      <Card className="h-full w-full">
+    <div className=" w-full overflow-hidden bg-white dark:bg-dark">
+      <h4 className="text-h4 font-bold font-roboto p-[24px] text-slate-800 dark:text-white"> LEADERBOARD </h4>
+      <Card className="h-full w-full bg-white dark:bg-dark dark:text-white shadow-md">
         <table className="w-full min-w-max table-auto">
           <thead>
-            <tr>
+            <tr className="bg-gray-100 dark:bg-dark">
               {TABLE_HEAD.map((head) => (
-                <th key={head} className="border-b border-white bg-white p-4">
-                  <Typography variant="small" color="blue-gray" className="font-normal leading-none opacity-70">
+                <th key={head} className="border-b border-gray-300 dark:bg-dark p-4">
+                  <Typography variant="small" color="blue-gray" className="font-normal leading-none opacity-70 dark:text-white">
                     {head}
                   </Typography>
                 </th>
@@ -43,12 +42,14 @@ export default function LeaderboardTable() {
             </tr>
           </thead>
           <tbody>
-            {leaderboard.map(({ rank, username,countryName, countryFlag, highestPerformanceScore }) => (
-              <tr key={username}>
-                <td>{rank}</td>
-                <td>{username}</td>
-                <td className="flex  text-center items-center justify-center flex-row gap-[8px]">{countryName} <img className="w-[24px] h-[16px]" src={countryFlag} alt=" country flag" /></td>
-                <td>{highestPerformanceScore.toFixed(0)}</td>
+            {leaderboard.map(({ rank, username, countryName, countryFlag, highestPerformanceScore }) => (
+              <tr key={username} className="border-b border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <td className="p-4 text-center dark:text-white">{rank}</td>
+                <td className="p-4 text-center dark:text-white">{username}</td>
+                <td className="p-4 flex items-center justify-center gap-2 dark:text-white">
+                  {countryName} <img className="w-[24px] h-[16px]" src={countryFlag} alt="country flag" />
+                </td>
+                <td className="p-4 text-center dark:text-white">{highestPerformanceScore.toFixed(0)}</td>
               </tr>
             ))}
           </tbody>

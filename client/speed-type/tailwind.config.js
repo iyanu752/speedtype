@@ -3,7 +3,7 @@ const require = createRequire(import.meta.url);
 const withMT = require("@material-tailwind/react/utils/withMT");
 /** @type {import('tailwindcss').Config} */
 export default withMT({
-    darkMode: ["class"],
+    darkMode: "class",
     content: [
     "./index.html",
 "./src/**/*.{js,ts,jsx,tsx}",
@@ -18,7 +18,8 @@ export default withMT({
   		gray: '#808080',
   		red: '#ff0000',
 		lightred: '#fecaca',
-		darkred: '#fca5a5'
+		darkred: '#fca5a5',
+		dark: '#333346',
   	},
   	fontFamily: {
   		roboto: [

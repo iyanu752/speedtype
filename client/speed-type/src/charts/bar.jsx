@@ -60,7 +60,7 @@ const Bar = () => {
       },
       labels: {
         style: {
-          colors: "#616161",
+          colors: "#0466c8",
           fontSize: "12px",
           fontFamily: "inherit",
           fontWeight: 400,
@@ -72,7 +72,7 @@ const Bar = () => {
     yaxis: {
       labels: {
         style: {
-          colors: "#616161",
+          colors: "#0466c8",
           fontSize: "12px",
           fontFamily: "inherit",
           fontWeight: 400,

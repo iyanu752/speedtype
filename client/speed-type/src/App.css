@@ -1,3 +1,20 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #71c3f7;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0028FF;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2c6cbc;
+}
+
+
 th {
     border-bottom: 1px solid black;
 }
@@ -17,6 +34,7 @@ td {
   .groups .svg-icon {
     filter: brightness(5%) saturate(50%) invert(39%) sepia(95%) saturate(1200%) hue-rotate(210deg) brightness(90%) contrast(100%);
   }
+
 
 
 

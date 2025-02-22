@@ -45,6 +45,10 @@ const SpeedTyper = () => {
     }
   }, [time, endGame]);
 
+  useEffect(() => {
+
+  })
+
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setUserInput(inputValue);
@@ -63,6 +67,13 @@ const SpeedTyper = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if(gameState === 'playing' && startTime) {
+      setWpm(calculateWPM())
+      setAccuracy(calculateAccuracy())
+    }
+  }, [userInput, wordIndex])
 
   const calculateWPM = () => {
     if (startTime) {
@@ -95,8 +106,8 @@ const SpeedTyper = () => {
   }, [resetTimer, generateWords]);
 
   return (
-    <div className="h-screen w-full  flex items-center justify-center">
-      <div className="bg-white border rounded-[10px] p-8 shadow-md w-full max-w-2xl">
+    <div className="h-screen bg-white dark:bg-dark dark:text-white w-full  flex items-center justify-center">
+      <div className="bg-white  border dark:border-white dark:bg-dark dark:text-white rounded-[10px] p-8 shadow-md w-full max-w-2xl">
         <h1 className="text-3xl font-bold mb-6 text-center">Typing Challenge</h1>
         
         <div className="mb-6 flex justify-between items-center">
@@ -120,7 +131,7 @@ const SpeedTyper = () => {
           value={userInput}
           onChange={handleInputChange}
           placeholder="Start typing here..."
-          className="mb-6 text-lg"
+          className="mb-6 text-lg bg-white text-black"
           disabled={gameState !== 'playing'}
         />
 
@@ -129,7 +140,7 @@ const SpeedTyper = () => {
             <div className="text-2xl font-bold">{String(wpm)}</div>
             <div className="text-sm text-gray-600">Words per minute</div>
           </div>
-          <div className="bg-green-100 p-4 rounded">
+          <div className="bg-green-200 dark:bg-green-300 -100 p-4 rounded">
             <div className="text-2xl font-bold">{String(accuracy)}%</div>
             <div className="text-sm text-gray-600">Accuracy</div>
           </div>

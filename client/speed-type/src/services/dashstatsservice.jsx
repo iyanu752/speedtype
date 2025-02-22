@@ -17,7 +17,6 @@ const postDashboardStats = async ( wpm, accuracy) => {
 const getCardStatistics = async () => {
     try {
         const response = await axios.get(API_ENDPOINTS.GET_DASH_STATS);
-        console.log('response', response);
         return response.data;
     } catch (error) {
         console.error("Error fetching dash stat data: ", error.response?.data);

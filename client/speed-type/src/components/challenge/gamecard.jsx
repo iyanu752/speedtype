@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import peopleLaptop from '/assets/people-laptop.png'
 export default function GameCard({ game }) {
   return (
-    <Card className="w-[30%] border rounded-[10px]">
+    <Card className="w-[30%] border rounded-[10px] dark:bg-dark">
 
       <CardBody>
       <img src={peopleLaptop} alt={'placeholder'} className=" w-full" />

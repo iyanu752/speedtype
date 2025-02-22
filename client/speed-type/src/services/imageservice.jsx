@@ -26,13 +26,23 @@ const uploadProfileImage = async (file) => {
 const fetchImages = async () => {
   try {
     const response = await axios.get(API_ENDPOINTS.FETCH_PROFILE_IMAGE);
-    console.log(response)
+
     return response.data;
   } catch (error) {
     console.error("Error fetching profile image:", error.response?.data || error.message);
     return null;
   }
 };
+
+const fetchUsers = async () => {
+  try {
+    const response = await axios.get(API_ENDPOINTS. USER);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching profile image:", error.response?.data || error.message);
+    return null;
+  }
+}
 
 
 const deleteProfileImage = async() => {
@@ -44,4 +54,4 @@ const deleteProfileImage = async() => {
     }
 }
 
-export {uploadProfileImage, fetchImages, deleteProfileImage};
+export {uploadProfileImage, fetchImages, deleteProfileImage, fetchUsers};

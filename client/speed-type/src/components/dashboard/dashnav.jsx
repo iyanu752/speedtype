@@ -11,9 +11,10 @@ import {
   MdDashboard,
   MdLeaderboard,
   MdGames,
-  MdHelpCenter,
   MdArrowForwardIos,
-  MdLogout 
+  MdLogout ,
+  MdLightMode,
+  MdNightlightRound
 } from "react-icons/md";
 import ProfileForm from "../profile/profile";
 import logo from "/assets/speedlogo.svg";
@@ -22,6 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from "../../services/authservice";
 import { fetchImages } from "../../services/imageservice";
+import { fetchUsers } from "../../services/imageservice";
 
 export default function Dashnav() {
   const location = useLocation();
@@ -34,6 +36,10 @@ export default function Dashnav() {
 
   const [user, setUser] = useState({});
   const [users, setUsers] = useState({})
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark" ||
+      (!localStorage.getItem("theme") && window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
 
 
   const logout = async () => {
@@ -47,31 +53,55 @@ export default function Dashnav() {
   }
 
   const onUploadSuccess = async (imageUrl) => {
-    const users = await fetchImages()
-    setUser({...users, profileImg: imageUrl})
+    const userProfile = await fetchImages()
+
+    setUser({...userProfile, profileImg: imageUrl})
   }
 
   const fetchUser = async () => {
     try {
-    const users = await fetchImages();
-    setUsers(users.user)
+    const userImage = await fetchImages();
+    setUser(userImage.user)
     } catch (error) {
       console.error("Error fetching images:", error.response?.data || error.message);
     } 
   };
 
+  const getUser = async () => {
+    try {
+      const userProfile = await fetchUsers();
+      setUsers(userProfile.user)
+      } catch (error) {
+        console.error("Error fetching images:", error.response?.data || error.message);
+      } 
+  }
+
   useEffect (() => {
+    
     if(localStorage.getItem('user')) {
       setUser(JSON.parse(localStorage.getItem('user')))
     }
     fetchUser()
+    getUser()
   }, []) 
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
 
   return (
     <Card
-      className={`h-screen rounded-none border transition-all duration-300 w-full ${
+      className={`h-screen rounded-none border border-black dark:border-white transition-all duration-300 w-full ${
         isMinimized ? "w-[5rem]" : "w-[320px]"
-      } p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col`}
+      } p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col bg-white dark:bg-dark`}
     >
       {/* Toggle Button */}
       <button
@@ -97,8 +127,8 @@ export default function Dashnav() {
       {/* Navigation List */}
       <List className={isMinimized ? " pt-[70px]" : ""}>
         <ListItem
-          className={`hover:text-blue hover:bg-light-blue-50 ${
-            isActive("/dashmain") ? "bg-light-blue-50 text-blue" : ""
+          className={`hover:text-blue hover:bg-light-blue-50 dark:hover:bg-blue-gray-700 dark:text-white  ${
+            isActive("/dashmain") ? "bg-light-blue-50 dark:hover:bg-blue-gray-700 text-blue dark:text-blue" : ""
           }`}
         >
           <ListItemPrefix>
@@ -109,8 +139,8 @@ export default function Dashnav() {
           {!isMinimized && <Link to="/dashmain">Dashboard</Link>}
         </ListItem>
         <ListItem
-          className={`hover:text-blue hover:bg-light-blue-50 ${
-            isActive("/dashleaderboard") ? "bg-light-blue-50 text-blue" : ""
+          className={`hover:text-blue hover:bg-light-blue-50 dark:hover:bg-blue-gray-700 dark:text-white  ${
+            isActive("/dashleaderboard") ? "bg-light-blue-50 dark:hover:bg-blue-gray-700 text-blue dark:text-blue" : ""
           }`}
         >
           <ListItemPrefix>
@@ -121,8 +151,8 @@ export default function Dashnav() {
           {!isMinimized && <Link to="/dashleaderboard">Leaderboard</Link>}
         </ListItem>
         <ListItem
-          className={`hover:text-blue hover:bg-light-blue-50 ${
-            isActive("/dashchallenges") ? "bg-light-blue-50 text-blue" : ""
+          className={`hover:text-blue hover:bg-light-blue-50 dark:hover:bg-blue-gray-700 dark:text-white ${
+            isActive("/dashchallenges") ? "bg-light-blue-50 dark:hover:bg-blue-gray-700 text-blue dark:text-blue" : ""
           }`}
         >
           <ListItemPrefix>
@@ -133,25 +163,19 @@ export default function Dashnav() {
           {!isMinimized && <Link to="/dashchallenges">Challenges</Link>}
         </ListItem>
 
-        <hr className="my-2 border-t border-blue-gray-50" />
+        <hr className="my-2 border-t border-blue-gray-50 dark:border-gray " />
 
-        <ListItem
-          className={`hover:text-blue hover:bg-light-blue-50 ${
-            isActive("/help") ? "bg-light-blue-50 text-blue" : ""
-          }`}
-        >
+        <ListItem onClick={toggleTheme} className="cursor-pointer hover:bg-gray-100 dark:hover:bg-blue-gray-700">
           <ListItemPrefix>
-            <Link to="/help">
-              <MdHelpCenter className="h-5 w-5" />
-            </Link>
+            {darkMode ? <MdLightMode className="h-5 w-5 text-yellow-500" /> : <MdNightlightRound className="h-5 w-5 text-gray-700 dark:text-white" />}
           </ListItemPrefix>
-          {!isMinimized && <Link to="/help">Help and Support</Link>}
+          {!isMinimized && <span className="dark:text-white">{darkMode ? "Light Mode" : "Dark Mode"}</span>}
         </ListItem>
       </List>
 
       {/* Profile Section */}
       <hr
-        className={`my-2 border-blue-gray-50 ${isMinimized ? "hidden" : ""}`}
+        className={`my-2 border-blue-gray-50  dark:border-gray ${isMinimized ? "hidden" : ""}`}
       />
       <div
         className={`flex items-center gap-4 mt-auto p-2 ${
@@ -166,10 +190,10 @@ export default function Dashnav() {
         />
         <ProfileForm userProfileImage={user.profileImg} onUploadSuccess={onUploadSuccess} open={modalOpen} handleOpen={toggleModal} />
         <div className={`${isMinimized ? "hidden" : ""}`}>
-          <Typography variant="small" color="blue-gray" className="font-medium">
+          <Typography variant="small" color="blue-gray" className="font-medium dark:text-white">
             {users.name || "john doe"}
           </Typography>
-          <Typography variant="small" color="blue-gray" className="text-xs">
+          <Typography variant="small" color="blue-gray" className="text-xs dark:text-white">
            {users.email || "email@example.com"}
           </Typography>
         </div>

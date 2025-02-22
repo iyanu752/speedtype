@@ -1,9 +1,11 @@
 import Chart from "react-apexcharts";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { getAreaStatistics } from "../services/dashstatsservice";
-const Area = () => {
+const Area = ({darkMode}) => {
   const [seriesData, setSeriesData] = useState ([0,0,0,0,0,0,0]) ;
   const dayOfTheWeek = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  ('dark', darkMode)
 
   const fetchData = async () => {
     const areaStats = await getAreaStatistics();
@@ -54,9 +56,9 @@ const Area = () => {
     markers: { size: 0 },
     xaxis: {
       categories: dayOfTheWeek,
-      labels: { style: { fontSize: "12px" } },
+      labels: { style: { fontSize: "12px", colors: "#0466c8"} },
     },
-    yaxis: { labels: { style: { fontSize: "12px" } } },
+    yaxis: { labels: { style: { fontSize: "12px", colors :"#0466c8"} } },
     grid: {
       borderColor: "#dddddd",
       strokeDashArray: 5,
@@ -82,4 +84,8 @@ const Area = () => {
   );
 };
 
-export default Area;
+Area.propTypes = {
+  darkMode: PropTypes.bool.isRequired
+}
+
+export default Area;  
