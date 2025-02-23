@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { signUpUser } from "../services/authservice";
 import signup from "/assets/signin.svg";
 import logo from "/assets/logo.svg";
-import google from "/assets/google.svg";
-import guest from "/assets/guest.png";
+// import google from "/assets/google.svg";
+// import guest from "/assets/guest.png";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -15,6 +15,7 @@ export default function Signup() {
   const [country, setCountry] = useState("");
   const [countries, setCountries] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
@@ -43,12 +44,15 @@ export default function Signup() {
   }, []);
 
   const submitSignin = async (e) => {
+    setIsLoading(true)
     e.preventDefault();
     const response = await signUpUser(name, country, email, password);
     if (response.success) {
+      setIsLoading(false)
       toast.success(response.message);
       navigate("/login");
     } else {
+      setIsLoading(false)
       toast.error(response.message);
     }
   };
@@ -157,26 +161,26 @@ export default function Signup() {
             </div>
           </div>
 
-          <button type="submit" className="w-full bg-blue text-white font-bold mt-[16px] py-2 px-4 rounded-[10px] hover:bg-blue-600">
-            Sign Up
+          <button type="submit" className="w-full bg-blue text-white font-bold mt-[16px] py-2 px-4 rounded-[10px] flex items-center justify-center gap-[8px] hover:bg-blue-600">
+            <span>Sign Up</span> <span className={`loader ${isLoading ? 'flex' : 'hidden'}`}></span>
           </button>
 
-          {/* Divider */}
-          <div className="flex items-center my-6">
+
+          {/* <div className="flex items-center my-6">
             <div className="flex-grow border-t border-gray"></div>
             <span className="mx-4 text-gray-500">Or</span>
             <div className="flex-grow border-t border-gray"></div>
-          </div>
+          </div> */}
 
           {/* Additional Sign-Up Options */}
-          <button type="button" className="border-2 border-gray w-full flex flex-row justify-center items-center gap-[8px] text-black font-bold py-2 px-4 rounded-[10px] mb-4">
+          {/* <button type="button" className="border-2 border-gray w-full flex flex-row justify-center items-center gap-[8px] text-black font-bold py-2 px-4 rounded-[10px] mb-4">
             <img className="w-[24px] h-[24px]" src={google} alt="" />
             Sign Up with Google
           </button>
           <button type="button" className="border-2 border-gray w-full flex flex-row justify-center items-center gap-[8px] text-black font-bold py-2 px-4 rounded-[10px]">
             <img className="w-[24px] h-[24px]" src={guest} alt="" />
             Sign Up as a Guest
-          </button>
+          </button> */}
 
           <p className="text-gray text-t2 text-center pt-[24px]">
             Already have an account? <span className="text-blue"><a href="/Login">Sign In</a></span>

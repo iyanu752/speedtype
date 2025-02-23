@@ -1,19 +1,20 @@
-import signup from '/assets/signin.svg';
+import signup from '/assets/login.svg';
 import logo from '/assets/logo.svg';
-import google from '/assets/google.svg'
+// import google from '/assets/google.svg'
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import guest from '/assets/guest.png'
+// import guest from '/assets/guest.png'
 import { loginUser } from '../services/authservice';
 export default function Login() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const togglePasswordVisibility = () => {
@@ -25,10 +26,13 @@ export default function Login() {
     e.preventDefault();
 
     const result = await loginUser(email, password);
+    setIsLoading(true)
     if (result.success) {
+      setIsLoading(false)
       toast.success(result.message);
       navigate("/dashmain");
     } else {
+      setIsLoading(false)
       toast.error(result.message);
     }
   };
@@ -91,20 +95,20 @@ export default function Login() {
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue text-white font-bold mt-[16px] py-2 px-4 rounded-[10px] hover:bg-blue-600"
+                className="w-full bg-blue text-white font-bold mt-[16px] py-2 px-4 rounded-[10px] hover:bg-blue-600 flex items-center justify-center gap-[8px]"
               >
-                Sign In
+               <span>Sign In</span><span className={`loader ${isLoading ? 'flex' : 'hidden'}`}></span> 
               </button>
     
               {/* Divider with "or" */}
-              <div className="flex items-center my-6">
+              {/* <div className="flex items-center my-6">
                 <div className="flex-grow border-t border-gray"></div>
                 <span className="mx-4 text-gray-500">Or</span>
                 <div className="flex-grow border-t border-gray"></div>
               </div>
-    
-              {/* Additional Sign-Up Options */}
-              <button
+     */}
+
+              {/* <button
                 type="button"
                 className=" border-2 border-gray w-full flex flex-row justify-center items-center gap-[8px]  text-black font-bold py-2 px-4 rounded-[10px] mb-4"
               >
@@ -117,7 +121,7 @@ export default function Login() {
               >
                 <img className='w-[24px] h-[24px]' src={guest} alt="" />
                 Sign In as a Guest
-              </button>
+              </button> */}
   
               <p className='text-gray text-t2 text-center pt-[32px]'>Don&apos;t have an account? <span className='text-blue'><a href="/Signup">Sign Up</a></span></p>
             </form>

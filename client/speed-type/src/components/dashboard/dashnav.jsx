@@ -22,7 +22,7 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { logoutUser } from "../../services/authservice";
-import { fetchImages } from "../../services/imageservice";
+import { fetchImages} from "../../services/imageservice";
 import { fetchUsers } from "../../services/imageservice";
 
 export default function Dashnav() {
@@ -54,10 +54,13 @@ export default function Dashnav() {
 
   const onUploadSuccess = async (imageUrl) => {
     const userProfile = await fetchImages()
-
     setUser({...userProfile, profileImg: imageUrl})
   }
 
+  // const onDeleteSuccess = async() => {
+  //   const deleteUserProfile = await deleteProfileImage()
+  //   setUser ({...deleteUserProfile, profileImg: "https://i.pravatar.cc/300"})
+  // }
   const fetchUser = async () => {
     try {
     const userImage = await fetchImages();

@@ -1,5 +1,5 @@
 import Leaderboard from '/assets/leaderboard-hero.png'
-
+import { motion } from 'framer-motion'
 export default function Leaderboardhero () {
     return (
         <>
@@ -11,8 +11,18 @@ export default function Leaderboardhero () {
             <p className='text-t1 font-medium'>Join the race to the top and see how you stack up against the best typists!</p>
             <div className='pt-[32px]'>        
                 <ul className='flex gap-3'>
-                <li><button className="text-white border-2 font-bold hover:border-blue  border-white hover:bg-blue rounded-[10px] py-[10px] w-[134px]"> View </button></li>
-                <li><button className="text-white border-2 font-bold hover:border-blue border-white hover:bg-blue rounded-[10px] py-[10px] w-[134px]"><a href='/About'>Challenge</a></button></li>
+                <li><motion.button 
+                whileHover={{
+                    scale: 1.1,
+                    transition: { duration: 0.2 },
+                  }}
+                className="text-white border-2 font-bold hover:border-blue  border-white hover:bg-blue rounded-[10px] py-[10px] w-[134px]"> <a href="/Login">View </a> </motion.button></li>
+                <li><motion.button 
+                whileHover={{
+                    scale: 1.1,
+                    transition: { duration: 0.2 },
+                  }}
+                className="text-white border-2 font-bold hover:border-blue border-white hover:bg-blue rounded-[10px] py-[10px] w-[134px]"><a href='/Signup'>Challenge</a></motion.button></li>
                 </ul>
             </div>
         </div>

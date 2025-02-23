@@ -13,7 +13,8 @@ const API_ENDPOINTS = {
   GET_AREA_STATS: `${BASE_URL}/dashstat/performance-history`,
   GET_LEADERBOARD: `${BASE_URL}/dashstat/leaderboard`,
   GET_BARSTATS: `${BASE_URL}/dashstat/barstats`,
-  GET_TOTAL_STATS: `${BASE_URL}/dashstat/totalstats`
+  GET_TOTAL_STATS: `${BASE_URL}/dashstat/totalstats`,
+  SEND_EMAIL: `${BASE_URL}/email/sendemail`
 
 };
 

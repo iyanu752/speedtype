@@ -35,6 +35,25 @@ td {
     filter: brightness(5%) saturate(50%) invert(39%) sepia(95%) saturate(1200%) hue-rotate(210deg) brightness(90%) contrast(100%);
   }
 
+  .loader {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #FFF;
+    border-bottom-color: #2c6cbc;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
 
 
 

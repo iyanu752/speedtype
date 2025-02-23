@@ -10,16 +10,17 @@ import {
   Avatar,
 //   Input,
 } from "@material-tailwind/react";
-import { MdOutlineCameraAlt, MdDeleteOutline } from "react-icons/md";
+import { MdOutlineCameraAlt,} from "react-icons/md";
 import PropTypes from "prop-types";
 // import axios from '../../config/axios'
-import { uploadProfileImage, deleteProfileImage}from "../../services/imageservice";
-export default function ProfileForm({ userProfileImage, onUploadSuccess, open, handleOpen }) {
+import { uploadProfileImage}from "../../services/imageservice";
+export default function ProfileForm({ userProfileImage, onUploadSuccess,  open, handleOpen }) {
   const [avatar, setAvatar] = useState("");
   // const [images, setImages] = useState([]);
   const [file, setFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  // const [isDeleting, setIsDeleting] = useState(false);
 
-  // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -31,39 +32,41 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
 
 
   const handleUpload = async () => {
+    setIsUploading(true);
     try {
       const imageUrl = await uploadProfileImage(file);
       if (imageUrl) {
         setAvatar(imageUrl);
-        toast.success("Profile picture uploaded sucessfully")
+        toast.success("Profile picture uploaded successfully");
         setTimeout(() => {
-          handleOpen()
+          handleOpen();
         }, 500);
-        setAvatar(imageUrl)
-        onUploadSuccess(imageUrl)
+        onUploadSuccess(imageUrl);
       }
     } catch (error) {
-      console.error("upload failed", error)
-      toast.error("Failed to upload image")
-      setTimeout(() => {
-        handleOpen()
-      }, 500);
+      console.error("Upload failed", error);
+      toast.error("Failed to upload image");
+    } finally {
+      setIsUploading(false);
     }
   };
-
-  const handleDelete = async () => {
-    try{
-      const deleteImageUrl = await deleteProfileImage()
-      if(deleteImageUrl) {
-        setAvatar(deleteImageUrl)
-        toast.success('Profile image deleted successfully')
-      }
-
-    }catch (error){
-        console.error("Error deleting profile image", error)
-        toast.error("Could not delete profile image")
-    }
-  }
+  
+  // const handleDelete = async () => {
+  //   setIsDeleting(true);
+  //   try {
+  //     const deleteImageUrl = await deleteProfileImage();
+  //     if (deleteImageUrl) {
+  //       setAvatar("https://i.pravatar.cc/300");
+  //       onDeleteSuccess("https://i.pravatar.cc/300");
+  //       toast.success("Profile image deleted successfully");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting profile image", error);
+  //     toast.error("Could not delete profile image");
+  //   } finally {
+  //     setIsDeleting(false);
+  //   }
+  // };
 
   useEffect(() => {
     setAvatar(userProfileImage)
@@ -92,14 +95,16 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
-            <Button
+            {/* <Button
               variant="outlined"
               className="flex bg-lightred hover:bg-darkred font-roboto font-semibold text-red rounded-[10px] items-center gap-2"
-              onClick={handleDelete} 
+              onClick={handleDelete}
+              disabled={isDeleting}
             >
               <MdDeleteOutline className="w-[24px]" />
-              Delete
-            </Button>
+              <span>Delete</span>
+              {isDeleting && <span className="loader flex"></span>}
+            </Button> */}
           </div>
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-[32px]">
             <Input label="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -111,9 +116,16 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess, open, h
         <Button variant="text" color="red" onClick={handleOpen} className="mr-1">
           <span>Cancel</span>
         </Button>
-        <Button variant="gradient" className="bg-blue rounded-[10px]" onClick={handleUpload}>
+        <Button
+          variant="gradient"
+          className="bg-blue rounded-[10px] flex gap-[8px]"
+          onClick={handleUpload}
+          disabled={isUploading}
+        >
           <span>Save</span>
+          {isUploading && <span className="loader flex"></span>}
         </Button>
+     
       </DialogFooter>
     </Dialog>
   );
@@ -123,5 +135,6 @@ ProfileForm.propTypes = {
   open: PropTypes.bool.isRequired,
   handleOpen: PropTypes.func.isRequired,
   onUploadSuccess: PropTypes.func.isRequired,
+  // onDeleteSuccess: PropTypes.func.isRequired,
   userProfileImage: PropTypes.string,
 };
