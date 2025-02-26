@@ -36,6 +36,9 @@ export default function Dashmain() {
 
   useEffect (() => {
     getStatData()
+  }, [])
+
+  useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
     localStorage.setItem("theme", darkMode ? "dark" : "light");
     setDarkMode((prev) => !prev);

@@ -19,7 +19,7 @@ export default withMT({
   		red: '#ff0000',
 		lightred: '#fecaca',
 		darkred: '#fca5a5',
-		dark: '#333346',
+		dark: '#000000',
   	},
   	fontFamily: {
   		roboto: [

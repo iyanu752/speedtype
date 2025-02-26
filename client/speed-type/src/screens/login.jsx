@@ -23,10 +23,9 @@ export default function Login() {
 
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-
-    const result = await loginUser(email, password);
     setIsLoading(true)
+    e.preventDefault();
+    const result = await loginUser(email, password);
     if (result.success) {
       setIsLoading(false)
       toast.success(result.message);
@@ -97,7 +96,7 @@ export default function Login() {
                 type="submit"
                 className="w-full bg-blue text-white font-bold mt-[16px] py-2 px-4 rounded-[10px] hover:bg-blue-600 flex items-center justify-center gap-[8px]"
               >
-               <span>Sign In</span><span className={`loader ${isLoading ? 'flex' : 'hidden'}`}></span> 
+               <span>Sign In</span><span className={`loader ${isLoading ? 'flex' : 'hidden'}`}></span>
               </button>
     
               {/* Divider with "or" */}
