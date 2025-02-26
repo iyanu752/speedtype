@@ -12,7 +12,7 @@ import { getCardStatistics } from '../../services/dashstatsservice';
 
 export default function Dashmain() {
   const [stats, setStats] = useState (null);
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("theme") === "dark");
+  const [darkMode] = useState(() => localStorage.getItem("theme") === "dark");
 
   const getStatData = async () => {
     const dashStats = await getCardStatistics()
@@ -39,10 +39,10 @@ export default function Dashmain() {
   }, [])
 
   useEffect(() => {
+    getStatData();
     document.documentElement.classList.toggle("dark", darkMode);
     localStorage.setItem("theme", darkMode ? "dark" : "light");
-    setDarkMode((prev) => !prev);
-  }, [darkMode])
+  }, [darkMode]);
  
 
     return (
