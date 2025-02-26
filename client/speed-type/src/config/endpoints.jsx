@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = "https://server-7yqn.onrender.com/api";
 
 const API_ENDPOINTS = {
   LOGIN: `${BASE_URL}/auth/login`,
