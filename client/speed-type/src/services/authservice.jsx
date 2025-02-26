@@ -44,6 +44,7 @@ const signUpUser = async (name, country, email, password) => {
         localStorage.removeItem("userId");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
+        localStorage.removeItem("theme")
         return {success: true, message: "Logout sucessful"}
       }  
     } catch (error) {
