@@ -94,7 +94,7 @@ export default function Dashmain() {
           <Area  darkMode={darkMode}/>
         </div>
         <div className="bg-white  dark:bg-dark dark:text-white shadow-sm flex   border rounded-[10px] p-4 overflow-hidden">
-          <LeaderboardTable />
+          <LeaderboardTable limit={5}/>
         </div>
       </div>
 
