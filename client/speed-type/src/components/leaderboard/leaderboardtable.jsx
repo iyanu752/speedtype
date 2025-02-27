@@ -4,18 +4,23 @@ import { useEffect, useState } from "react";
 
 export default function LeaderboardTable() {
   const [leaderboard, setLeaderboard] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
 
   const TABLE_HEAD = ["Rank", "Username", "Country", "Points"];
 
   const fetchLeaderboard = async () => {
+    setIsLoading(true)
     try {
       const response = await getLeaderboard();
       if (response.success && Array.isArray(response.leaderboard)) {
+        setIsLoading(false)
         setLeaderboard(response.leaderboard);
       } else {
+        setIsLoading(false)
         setLeaderboard([]);
       }
     } catch (error) {
+      setIsLoading(false)
       console.error("Error fetching leaderboard:", error);
       setLeaderboard([]);
     }
@@ -28,7 +33,7 @@ export default function LeaderboardTable() {
   return (
     <div className=" w-full overflow-hidden bg-white dark:bg-dark">
       <h4 className="text-h4 font-bold font-roboto p-[24px] text-slate-800 dark:text-white"> LEADERBOARD </h4>
-      <Card className="h-full w-full bg-white dark:bg-dark dark:text-white shadow-md">
+      <Card className="h-full w-full bg-white dark:bg-dark dark:text-white shadow-md"> 
         <table className="w-full min-w-max table-auto">
           <thead>
             <tr className="bg-gray-100 dark:bg-dark">
@@ -54,6 +59,9 @@ export default function LeaderboardTable() {
             ))}
           </tbody>
         </table>
+        <div className="flex items-center justify-center">
+            <span className={`loader2 ${isLoading ? 'flex' : 'hidden'}`}></span>
+        </div>
       </Card>
     </div>
   );
