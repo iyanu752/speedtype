@@ -24,7 +24,7 @@ export default function Toptypists() {
         </p>
       </motion.div>
       <div className=" w-full">
-        <LeaderboardTable />
+        <LeaderboardTable limit={5}/>
       </div>
     </div>
   );
