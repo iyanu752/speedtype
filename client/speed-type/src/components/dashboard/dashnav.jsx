@@ -101,11 +101,12 @@ export default function Dashnav() {
   const toggleTheme = () => setDarkMode(!darkMode);
 
   return (
-    <Card
-      className={`h-screen rounded-none border border-black dark:border-white transition-all duration-300 w-full ${
-        isMinimized ? "w-[5rem]" : "w-[320px]"
-      } p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col bg-white dark:bg-dark`}
-    >
+<Card
+  className={`h-screen rounded-none border border-black dark:border-white transition-all duration-300 
+  ${isMinimized ? "w-[5rem]" : "w-[320px]"} 
+  p-4 shadow-xl shadow-blue-gray-900/5 overflow-hidden flex flex-col bg-white dark:bg-dark 
+  sticky top-0`}
+>
       {/* Toggle Button */}
       <button
         onClick={() => setIsMinimized(!isMinimized)}
@@ -186,7 +187,7 @@ export default function Dashnav() {
         }`}
       >
         <img
-          src={user.profileImg || "https://i.pravatar.cc/300"}
+          src={user.profileImg || "https://avatar.iran.liara.run/public/boy?username=Ash"}
           alt="Profile"
           className="w-10 h-10 rounded-full object-cover"
           onClick={toggleModal}

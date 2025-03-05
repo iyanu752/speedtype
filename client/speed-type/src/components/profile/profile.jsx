@@ -78,7 +78,7 @@ export default function ProfileForm({ userProfileImage, onUploadSuccess,  open, 
       <DialogHeader>Profile</DialogHeader>
       <DialogBody>
         <div className="flex flex-col justify-center items-center">
-          <Avatar src={avatar} alt="avatar" withBorder={false} className="p-4 w-32 h-32" />
+          <Avatar src={avatar || 'https://avatar.iran.liara.run/public/boy?username=Ash'} alt="avatar" withBorder={false} className="p-4 w-32 h-32" />
           <div className="flex gap-[16px] py-[24px] items-center flex-row">
             <Button
               variant="outlined"
