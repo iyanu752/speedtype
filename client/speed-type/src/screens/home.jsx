@@ -2,9 +2,9 @@ import FunChallenge from "../components/home/funchallenges";
 import Herohome from "../components/home/herohome";
 function Home () {
     return (
-        <div>
+        <div className=" overflow-x-hidden"> 
         <Herohome />
-            <FunChallenge/>
+        <FunChallenge/>
         </div>
     )
 }

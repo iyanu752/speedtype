@@ -54,27 +54,7 @@ AppLayout.propTypes = {
   children: PropTypes.node,
 };
 
-// ✅ Detect Mobile and Show Warning Instead of App
-function DeviceCheck({ children }) {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (/mobile|android|iphone|ipad|tablet/i.test(userAgent)) {
-      setIsMobile(true);
-    }
-  }, []);
-
-  if (isMobile) {
-    return (
-      <div className="h-screen flex justify-center items-center text-h5 text-white bg-blue p-6">
-        ❌ This application is only available on Laptops and Desktops. Please use a larger screen.
-      </div>
-    );
-  }
-
-  return children;
-}
 
 function App() {
   const router = createBrowserRouter([
@@ -94,26 +74,19 @@ function App() {
   ]);
 
   return (
-    <DeviceCheck>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        theme="light"
-        pauseOnFocusLoss={false}
-        pauseOnHover={false}
-        draggable={false}
-      />
-      <RouterProvider router={router} />
-    </DeviceCheck>
+      <><ToastContainer
+      position="top-right"
+      autoClose={3000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="light"
+      pauseOnFocusLoss={false}
+      pauseOnHover={false}
+      draggable={false} /><RouterProvider router={router} /></>
   );
 }
 
 export default App;
 
-DeviceCheck.propTypes = {
-  children: PropTypes.node,
-};
